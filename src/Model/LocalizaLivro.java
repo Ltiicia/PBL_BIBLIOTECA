@@ -4,13 +4,12 @@ import Model.Livro;
 
 import java.util.Date;
 
-public class LocalizaLivro extends Livro {
+public class LocalizaLivro{
     private String prateleira;
     private String sessao;
     private String corredor;
 
-    public LocalizaLivro(String titulo, String autor, String editora, String isbn, Date anoPublicacao, String categoria, String prateleira, String sessao, String corredor) {
-        super(titulo, autor, editora, isbn, anoPublicacao, categoria);
+    public LocalizaLivro(String prateleira, String sessao, String corredor) {
         this.prateleira = prateleira;
         this.sessao = sessao;
         this.corredor = corredor;

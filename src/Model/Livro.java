@@ -24,6 +24,7 @@ public class Livro {
         this.quantidade = quantidade;
     }
 
+
     // Métodos getter para acessar os atributos
     public String getTitulo() {
 

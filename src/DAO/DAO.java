@@ -1,36 +1,40 @@
 package DAO;
 
-import DAO.Book.BookDAO;
-import DAO.Book.BookDaoImpl;
-import DAO.User.UserDAO;
+import Model.Pessoa;
+import Model.Livro;
+import DAO.Livro.LivroDAOImpl;
+
+/*import DAO.User.UserDAO;
 import DAO.User.UserDaoImpl;
 import DAO.loan.LoanDAO;
 import DAO.loan.LoanDAOImpl;
+import Model.Emprestimo;
+*/
 
 public class DAO {
-    private static BookDAO bookDAO;
-    private static UserDAO userDAO;
-    private static LoanDAO loanDAO;
+    private static LivroDAO livroDAO;
+    //private static PessoaDAO pessoaDAO;
+    //private static EmprestimoDAO emprestimoDAO;
 
-    public static BookDAO getBookDAO(){
-        if (bookDAO == null) {
-            bookDAO = new BookDaoImpl();
+    public static LivroDAO getBookDAO(){
+        if (livroDAO == null) {
+            livroDAO = new LivroDAO();
         }
-        return bookDAO;
+        return livroDAO;
     }
 
-    public static UserDAO getUserDAO(){
-        if (userDAO == null){
-            userDAO = new UserDaoImpl();
+   /* public static PessoaDAO getUserDAO(){
+        if (PessoaDAO == null){
+            PessoaDAO = new PessoaDAOImpl();
         }
-        return userDAO;
-    }
+        return pessoaDAO;
+    }*/
 
-    public static LoanDAO getLoanDAO() {
-        if(loanDAO == null) {
-            loanDAO = new LoanDAOImpl();
+    /*public static EmprestimoDAO getLoanDAO() {
+        if(emprestimoDAO == null) {
+            emprestimoDAO = new EmprestimoDAOImpl();
         }
-        return loanDAO;
-    }
+        return emprestimoDAO;
+    }*/
 
 }
