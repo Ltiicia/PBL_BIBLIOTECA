@@ -8,12 +8,10 @@ public interface CRUD <T>{
 
     public void delete(T obj);
 
-    public void deleteMany();
-
     public T update(T obj);
 
-    public List<T> findMany();
+    public List<T> findMany(); //retorna lista de obj
 
-    public T findById(int id);
+    public T findById(int id); // retorna um obj
 
 }
