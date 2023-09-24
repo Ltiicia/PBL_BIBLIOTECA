@@ -1,7 +1,5 @@
-package model;
-import Model.Endereco;
+package Model;
 
-import java.util.Date;
 public class Pessoa {
     private String nome;
     private int id;
@@ -55,7 +53,7 @@ public class Pessoa {
     }
     public void setSenha(String Senha) {
 
-        this.Senha = Senha;
+        this.senha = Senha;
     }
     public void setIdade(int idade) {
 

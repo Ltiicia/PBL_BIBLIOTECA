@@ -1,4 +1,9 @@
 package DAO.Pessoa;
+import Model.Pessoa;
+import DAO.CRUD;
 
-public class PessoaDAO {
+
+public interface PessoaDAO extends CRUD<Pessoa> {
+
+
 }
