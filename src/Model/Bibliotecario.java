@@ -1,29 +1,53 @@
 package Model;
 
+import DAO.Livro.LivroDAO;
+
+import java.util.Calendar;
+import java.util.Date;
+
 public class Bibliotecario extends Pessoa {
-    public Bibliotecario(String nome, int id, String senha) {
-        super(nome, id, senha);
+
+    private int idEmprestimo = 0;
+
+    private int generateId(int idEmprestimo){ //Gera id automaticamente
+        return idEmprestimo+=1;
+    }
+    public Bibliotecario(String nome, int id, String senha, int idade, int celular) {
+        super(nome, id, senha, idade, celular);
+    }
+    public Date datahoje(){
+        return new Date();
     }
 
-    // Método para pesquisar livros pelo título ou autor
-    public Livro pesquisaLivros(String termo) {
-        // Lógica para pesquisar livros no sistema e retornar o livro encontrado
-        // ou null se não for encontrado
-        return null;
+    public Date datafinal(Date datahoje){ //data final com prazo de 7 dias
+        // Convertendo a data atual para um objeto Calendar
+        Calendar calendario = Calendar.getInstance();
+        calendario.setTime(datahoje);
+        // Somando 10 dias à data de hoje
+        calendario.add(Calendar.DAY_OF_MONTH, 7);
+        // Obtendo a nova data após a adição de 7 dias
+        return calendario.getTime();
     }
 
-    // Método para registrar um novo livro no sistema
-    public void registraLivro(Livro livro) {
-        // Lógica para adicionar o livro à base de dados da biblioteca
-    }
+    public void registro_emprestimo(Leitor leitor, Livro livro){
 
-    // Método para realizar um empréstimo de um livro para um leitor
-    public void fazEmprestimo(Leitor leitor, Livro livro) {
-        // Lógica para registrar o empréstimo do livro para o leitor
-    }
+        int emprestimoId = generateId(idEmprestimo);
+        Date dataEmprestimo = datahoje();
+        Date dataDevolucao = datafinal(dataEmprestimo);
 
-    // Método para registrar a devolução de um livro pelo leitor
-    public void fazDevolucao(Leitor leitor, Livro livro) {
-        // Lógica para registrar a devolução do livro pelo leitor
+
+        Emprestimo emprestimo = new Emprestimo(emprestimoId, leitor.getId(), livro, dataEmprestimo, dataDevolucao, 0);
+        System.out.println("\nEmprestimo realizado!");
+
+    }
+    public void registrar_livro(String titulo, String autor, String editora, int Isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade){
+        Livro livro = new Livro(titulo, autor, editora, Isbn, anoPublicacao, categoria, localizacao, quantidade);
+        LivroDAO livroDAO = DAO.getLivroDAO(); //Usando o DAO para adicionar o livro ao banco de dados
+        livroDAO.create(livro); //criou o book no banco de dados e armazenou no map tendo o seu isbn como id
+        System.out.println("\nRegistro realizado!");
+
+    }
+    public void registro_devolucao(Leitor leitor, Livro livro){
+        //fazer
     }
 }

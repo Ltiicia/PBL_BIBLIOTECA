@@ -6,15 +6,13 @@ public class Pessoa {
     private String senha;
     private int idade;
     private int celular;
-    private Endereco endereco;
 
-    public Pessoa(String nome, String senha, int idade, int celular, Endereco endereco){  //construtor
+    public Pessoa(String nome, int id, String senha, int idade, int celular,){  //construtor
         this.nome = nome;
         this.id = -1;  //ALTERADO NA CLASSE PESSOADAOIMPL
         this.senha = senha;
         this.idade = idade;
         this.celular = celular;
-        this.endereco = endereco;
     }
     // Métodos Get
     public String getNome() {
@@ -37,10 +35,6 @@ public class Pessoa {
 
         return celular;
     }
-    public Endereco getEndereco() {
-
-        return endereco;
-    }
 
     // Métodos Set
     public void setNome(String nome) {
@@ -62,10 +56,6 @@ public class Pessoa {
     public void setCelular(int celular) {
 
         this.celular = celular;
-    }
-    public void setEndereco(Endereco endereco) {
-
-        this.endereco = endereco;
     }
     @Override
     public String toString() {
