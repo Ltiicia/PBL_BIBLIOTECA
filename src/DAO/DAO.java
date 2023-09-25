@@ -1,15 +1,11 @@
 package DAO;
 
-import Model.Pessoa;
 import Model.Livro;
 import DAO.Livro.LivroDAOImpl;
 
-/*import DAO.User.UserDAO;
-import DAO.User.UserDaoImpl;
-import DAO.loan.LoanDAO;
-import DAO.loan.LoanDAOImpl;
+import DAO.Emprestimo.EmprestimoDAO;
+import DAO.Empresimo.EmprestimoDAOImpl;
 import Model.Emprestimo;
-*/
 
 public class DAO {
     private static LivroDAO livroDAO;
@@ -30,11 +26,11 @@ public class DAO {
         return pessoaDAO;
     }*/
 
-    /*public static EmprestimoDAO getLoanDAO() {
+    public static EmprestimoDAO getEmprestimoDAO() {
         if(emprestimoDAO == null) {
             emprestimoDAO = new EmprestimoDAOImpl();
         }
         return emprestimoDAO;
-    }*/
+    }
 
 }
