@@ -12,9 +12,9 @@ public class DAO {
     //private static PessoaDAO pessoaDAO;
     //private static EmprestimoDAO emprestimoDAO;
 
-    public static LivroDAO getBookDAO(){
+    public static LivroDAO getLivroDAO(){
         if (livroDAO == null) {
-            livroDAO = new LivroDAO();
+            livroDAO = new LivroDAOImpl();
         }
         return livroDAO;
     }
