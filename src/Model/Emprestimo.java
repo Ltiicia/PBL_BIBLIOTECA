@@ -17,8 +17,9 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
         this.renovacaoQuantidade = renovacaoQuantidade;
     }
-    public int getIdEmprestimo() {return idEmprestimo;}
-
+    public int getIdEmprestimo() {
+        return idEmprestimo;
+    }
     public int getIdLeitor(){
         return idLeitor;
     }

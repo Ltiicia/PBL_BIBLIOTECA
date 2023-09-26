@@ -1,16 +1,17 @@
 package DAO;
 
 import Model.Livro;
+import DAO.Livro.LivroDAO;
 import DAO.Livro.LivroDAOImpl;
 
 import DAO.Emprestimo.EmprestimoDAO;
-import DAO.Empresimo.EmprestimoDAOImpl;
+import DAO.Emprestimo.EmprestimoDAOImpl;
 import Model.Emprestimo;
 
 public class DAO {
     private static LivroDAO livroDAO;
     //private static PessoaDAO pessoaDAO;
-    //private static EmprestimoDAO emprestimoDAO;
+    private static EmprestimoDAO emprestimoDAO;
 
     public static LivroDAO getLivroDAO(){
         if (livroDAO == null) {

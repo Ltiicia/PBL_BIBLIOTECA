@@ -1,8 +1,8 @@
-package DAO.Pessoa;
-import Model.Pessoa;
+package DAO.Emprestimo;
+import Model.Emprestimo;
 import DAO.CRUD;
 
 
-public interface Emprestimo extends CRUD<Emprestimo> {
+public interface EmprestimoDAO extends CRUD<Emprestimo> {
     public Emprestimo returnEmprestimo(Emprestimo emprestimo);
 }
