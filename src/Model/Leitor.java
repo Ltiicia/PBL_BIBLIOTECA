@@ -5,7 +5,7 @@ public class Leitor extends Pessoa{  //leitor
     public Boolean block;
     //public List<Emprestimo> loan_history;
     // Construtor para a classe Reader
-    public Leitor(String nome, String id, String senha, int idade, int celular, Endereco endereco, Boolean block) {
+    public Leitor(String nome, int id, String senha, int idade, int celular, Endereco endereco, Boolean block) {
         super(nome, id, senha, idade, celular, block);
         this.block = block;
     }
