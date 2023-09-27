@@ -6,13 +6,15 @@ public class Pessoa {
     private String senha;
     private int idade;
     private int celular;
+    private String endereco;
 
-    public Pessoa(String nome, int id, String senha, int idade, int celular,){  //construtor
+    public Pessoa(String nome, int id, String senha, int idade, int celular, String endereco){  //construtor
         this.nome = nome;
         this.id = -1;  //ALTERADO NA CLASSE PESSOADAOIMPL
         this.senha = senha;
         this.idade = idade;
         this.celular = celular;
+        this.endereco = endereco;
     }
     // Métodos Get
     public String getNome() {
@@ -34,6 +36,9 @@ public class Pessoa {
     public int getCelular() {
 
         return celular;
+    }
+    public String getEndereco(){
+        return endereco;
     }
 
     // Métodos Set
@@ -57,19 +62,23 @@ public class Pessoa {
 
         this.celular = celular;
     }
+
+    public void setEndereco(String endereco){
+        this.endereco = endereco;
+    }
     @Override
     public String toString() {
-        return "[Pessoa]: " + id + "\n -Informações-\n" + "nome: " + nome + "idade: " + idade + "celular: " + celular;
+        return "[Pessoa]: " + id + "\n -Informações-\n" + "nome: " + nome + "idade: " + idade + "celular: " + celular + "endereço:" + endereco;
     }
     //o metodo equals verifica se as senhas de dois objetos são iguais
-    public boolean equals(Object o) {
-        if (this == o){
+    public boolean equals(Object obj) {
+        if (this == obj){
             return true;
         }
-        if (o == null || getClass() != o.getClass()){
+        if (obj == null || getClass() != obj.getClass()){
             return false;
         }
-       Pessoa pessoa = (Pessoa) o;
+       Pessoa pessoa = (Pessoa) obj;
         return id == Pessoa.id;
     }
 }
