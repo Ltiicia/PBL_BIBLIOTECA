@@ -78,7 +78,7 @@ public class Pessoa {
         if (obj == null || getClass() != obj.getClass()){
             return false;
         }
-       Pessoa pessoa = (Pessoa) obj;
-        return id == Pessoa.id;
+        Pessoa pessoa = (Pessoa) obj;
+        return id == pessoa.id;
     }
 }

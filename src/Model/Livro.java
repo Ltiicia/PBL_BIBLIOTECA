@@ -10,10 +10,11 @@ public class Livro {
     private Date anoPublicacao;
     private String categoria;
     private LocalizaLivro localizacao;
-
     private int quantidade;
+    private boolean podeEmprestimo;
+    private boolean reserva;
 
-    public Livro(String titulo, String autor, String editora, int isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade ) {
+    public Livro(String titulo, String autor, String editora, int isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade, boolean podeEmprestimo, boolean reserva ) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
@@ -22,6 +23,8 @@ public class Livro {
         this.categoria = categoria;
         this.localizacao = localizacao;
         this.quantidade = quantidade;
+        this.podeEmprestimo = podeEmprestimo;
+        this.reserva = reserva;
     }
 
 
@@ -56,7 +59,12 @@ public class Livro {
     public int getQuantidade(){
         return quantidade;
     }
-
+    public boolean getPodeEmprestimo(){
+        return podeEmprestimo;
+    }
+    public boolean getReserva(){
+        return reserva;
+    }
 
     // Métodos setter para definir os atributos (caso seja necessário)
     public void setTitulo(String titulo) {
@@ -83,6 +91,13 @@ public class Livro {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public void setPodeEmprestimo(boolean podeEmprestimo){
+        this.podeEmprestimo = podeEmprestimo;
+    }
+    public void setReserva(boolean reserva) {
+        this.reserva = reserva;
     }
 
     public void alterarTitulo(){

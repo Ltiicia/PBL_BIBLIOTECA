@@ -12,8 +12,8 @@ public class Bibliotecario extends Pessoa {
     private int generateId(int idEmprestimo){ //Gera id automaticamente
         return idEmprestimo+=1;
     }
-    public Bibliotecario(String nome, int id, String senha, int idade, int celular) {
-        super(nome, id, senha, idade, celular);
+    public Bibliotecario(String nome, int id, String senha, int idade, int celular, String endereco) {
+        super(nome, id, senha, idade, celular, endereco);
     }
     public Date datahoje(){
         return new Date();
@@ -40,8 +40,8 @@ public class Bibliotecario extends Pessoa {
         System.out.println("\nEmprestimo realizado!");
 
     }
-    public void registrar_livro(String titulo, String autor, String editora, int Isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade){
-        Livro livro = new Livro(titulo, autor, editora, Isbn, anoPublicacao, categoria, localizacao, quantidade);
+    public void registrar_livro(String titulo, String autor, String editora, int Isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade, boolean podeEmprestimo, boolean reserva){
+        Livro livro = new Livro(titulo, autor, editora, Isbn, anoPublicacao, categoria, localizacao, quantidade, podeEmprestimo, reserva);
         LivroDAO livroDAO = DAO.getLivroDAO(); //Usando o DAO para adicionar o livro ao banco de dados
         livroDAO.create(livro); //criou o book no banco de dados e armazenou no map tendo o seu isbn como id
         System.out.println("\nRegistro realizado!");
