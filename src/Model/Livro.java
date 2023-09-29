@@ -1,6 +1,8 @@
 package Model;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Livro {
     private String titulo;
@@ -11,10 +13,8 @@ public class Livro {
     private String categoria;
     private LocalizaLivro localizacao;
     private int quantidade;
-    private boolean podeEmprestimo;
-    private boolean reserva;
-
-    public Livro(String titulo, String autor, String editora, int isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade, boolean podeEmprestimo, boolean reserva ) {
+    private Queue<Leitor> reservaFila = new LinkedList<>();
+    public Livro(String titulo, String autor, String editora, int isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
@@ -23,10 +23,11 @@ public class Livro {
         this.categoria = categoria;
         this.localizacao = localizacao;
         this.quantidade = quantidade;
-        this.podeEmprestimo = podeEmprestimo;
-        this.reserva = reserva;
+
     }
 
+    public void addReservaFila(Leitor leitor){  // Adicionando leitores à fila do livro
+        reservaFila.offer(leitor);}
 
     // Métodos getter para acessar os atributos
     public String getTitulo() {
@@ -59,12 +60,6 @@ public class Livro {
     public int getQuantidade(){
         return quantidade;
     }
-    public boolean getPodeEmprestimo(){
-        return podeEmprestimo;
-    }
-    public boolean getReserva(){
-        return reserva;
-    }
 
     // Métodos setter para definir os atributos (caso seja necessário)
     public void setTitulo(String titulo) {
@@ -93,12 +88,6 @@ public class Livro {
         this.quantidade = quantidade;
     }
 
-    public void setPodeEmprestimo(boolean podeEmprestimo){
-        this.podeEmprestimo = podeEmprestimo;
-    }
-    public void setReserva(boolean reserva) {
-        this.reserva = reserva;
-    }
 
     public void alterarTitulo(){
 

@@ -40,8 +40,8 @@ public class Bibliotecario extends Pessoa {
         System.out.println("\nEmprestimo realizado!");
 
     }
-    public void registrar_livro(String titulo, String autor, String editora, int Isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade, boolean podeEmprestimo, boolean reserva){
-        Livro livro = new Livro(titulo, autor, editora, Isbn, anoPublicacao, categoria, localizacao, quantidade, podeEmprestimo, reserva);
+    public void registrar_livro(String titulo, String autor, String editora, int Isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade){
+        Livro livro = new Livro(titulo, autor, editora, Isbn, anoPublicacao, categoria, localizacao, quantidade);
         LivroDAO livroDAO = DAO.getLivroDAO(); //Usando o DAO para adicionar o livro ao banco de dados
         livroDAO.create(livro); //criou o book no banco de dados e armazenou no map tendo o seu isbn como id
         System.out.println("\nRegistro realizado!");

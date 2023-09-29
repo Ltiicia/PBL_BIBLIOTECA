@@ -33,46 +33,30 @@ public class LivroDAOImpl implements LivroDAO {
         int id = obj.getIsbn();
         livrosmap.remove(id);}
 
-    /*
-    public Livro findByTitle(String titulo) {
-        for (Livro livro : this.list) {
-            if (Livro.getTitulo().equalsIgnoreCase(titulo)) {
+
+    public Livro findTitulo(String titulo) {
+        for (Livro livro : livrosmap.values()) {
+            if (livro.getTitulo().equalsIgnoreCase(titulo)) {
                 return livro;
             }
         }
         return null;
     }
-    public Livro findByAutor(String autor) {
-        for (Livro livro : this.list) {
+    public Livro findAutor(String autor) {
+        for (Livro livro : livrosmap.values()) {
             if (livro.getAutor().equalsIgnoreCase(autor)) {
                 return livro;
             }
         }
         return null;
     }
-    public Livro findByCategoria(String categoria) {
-        for (Livro livro : this.list) {
+    public Livro findCategoria(String categoria) {
+        for (Livro livro : livrosmap.values()) {
             if (livro.getCategoria().equalsIgnoreCase(categoria)) {
                 return livro;
             }
         }
         return null;
     }
-    @Override
-    public Livro atualizar(Livro livro) {
-        int indice = list.indexOf(livro);
-        this.list.set(indice, livro);
-        return livro;
-    }
 
-    @Override
-    public void apagar(Livro livro) {
-        this.list.remove(livro);
-    }
-
-    public void apagarTodos() {
-        this.list.clear();
-    }
-
-     */
 }

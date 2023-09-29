@@ -1,6 +1,7 @@
 package DAO.Emprestimo;
 
 import DAO.Emprestimo.EmprestimoDAO;
+import Model.Leitor;
 import Model.Livro;
 import Model.Emprestimo;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Map;
 public class EmprestimoDAOImpl implements EmprestimoDAO {
     private final Map<Integer, Emprestimo> emprestimoMap = new HashMap<>();
 
+    private List<Emprestimo> emprestimos;
     public Emprestimo create(Emprestimo emprestimo){
         int id = emprestimo.getIdEmprestimo();
         emprestimoMap.put(id, emprestimo);
@@ -44,4 +46,15 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
 
         return emprestimo;
     }
+
+    /*
+    @Override
+    public List<Emprestimo> findByLeitor(Leitor leitor) {
+        emprestimosLeitor = new ArrayList<>(emprestimoMap.values());
+        for(Emprestimo emprestimosLeitor: emprestimoMap.values()){
+            if(emprestimosLeitor.getLeitor().equals(leitor.getId()))
+                emprestimosLeitor.add(emprestimosLeitor);
+        }
+        return emprestimosLeitor;
+    }*/
 }
