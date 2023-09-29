@@ -1,9 +1,8 @@
 package DAO.Livro;
 import Model.Livro;
-import java.util.Map;
 import DAO.CRUD;
 
-public interface LivroDAO extends CRUD<Livro>{
+public interface LivroDAO extends CRUD<Livro, Exception>{
 
     /*
     public void apagarLivros();
