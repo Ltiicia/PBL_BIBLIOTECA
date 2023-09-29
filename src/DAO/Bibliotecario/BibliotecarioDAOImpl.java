@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class BibliotecarioDAOImpl implements BibliotecarioDAO{
 
-    private final Map<Integer, Bibliotecario> bibiotecarioMap = new HashMap<>();
+    private final Map<Integer, Bibliotecario> bibliotecarioMap = new HashMap<>();
 
     @Override
     public Bibliotecario create(Bibliotecario bibliotecario) {
-        int Id = bibliotecario.getId();
-        bibiotecarioMap.put(id, bibliotecario);
-        return bibiotecario;
+        int id = bibliotecario.getId();
+        bibliotecarioMap.put(id, bibliotecario);
+        return bibliotecario;
     }
 
     @Override
@@ -32,11 +32,12 @@ public class BibliotecarioDAOImpl implements BibliotecarioDAO{
 
     @Override
     public List<Bibliotecario> findMany() {
-        return new ArrayList<>(bibiotecarioMap.values());
+        return new ArrayList<>(bibliotecarioMap.values());
     }
 
     @Override
     public Bibliotecario findById(int id) {
-        return bibiotecarioMap.get(id);
+        return bibliotecarioMap.get(id);
     }
+
 }

@@ -2,8 +2,10 @@ package DAO.ADM;
 
 import Model.ADM;
 
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 public class ADMDAOImpl implements ADMDAO{
     private final Map<Integer, ADM> AdmMap = new HashMap<>();
