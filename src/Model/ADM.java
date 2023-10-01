@@ -86,7 +86,8 @@ public class ADM extends Bibliotecario{
 
         ADMDAO admDao = DAO.getAdmDAO();
         admDao.create(ADM); //criou o book no banco de dados e armazenou no map tendo o seu id como chave
-        return adm;}
+        return adm;
+    }
 
     //OPERAÇÕES DE USUARIOS
 
