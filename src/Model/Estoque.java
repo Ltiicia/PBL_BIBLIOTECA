@@ -6,10 +6,8 @@ import Model.Livro;
 import java.util.List;
 
 public class Estoque {
-    private int numLivros;
 
     public Estoque(int numLivros) {
-        this.numLivros = numLivros;
     }
 
     public Livro addLivro(Livro newLivro){

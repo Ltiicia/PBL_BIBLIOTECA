@@ -21,16 +21,25 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
         return proxId++;
     }
 
+
+    
+    //dicionario p/ guardar os emprestimos
+
+    private List<Emprestimo> emprestimos;
+    //???
+
     public Emprestimo create(Emprestimo emprestimo){
         long id = emprestimo.getIdEmprestimo();
         emprestimoMap.put(id, emprestimo);
         return emprestimo;
     }
+    //guarda os emprestimos na lista
 
     @Override
     public List<Emprestimo> findMany(){
         return new ArrayList<>(emprestimoMap.values());
     }
+    //retorna lista de emprestimos
 
 
 
@@ -44,6 +53,7 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
         }
 
     }
+    //retorna o emprestimo por id
 
     @Override
     public Emprestimo update(Emprestimo emprestimo){
@@ -51,13 +61,17 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
         return null;
     }
 
+
     @Override
     public void delete(Emprestimo emprestimo){
         long id = emprestimo.getIdEmprestimo();
         emprestimoMap.remove(id);
     }
 
+
     public void deleteMany(){
         emprestimoMap.clear();
+
+
     }
 }
