@@ -2,17 +2,20 @@ package DAO.Livro;
 
 import Model.Livro;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LivroDAOImpl implements LivroDAO {
-    private final Map<Integer, Livro> livrosmap = new HashMap<>(); //map que guarda os livros numa estrutura Isbn:livro
+    private final Map<String, Livro> livrosmap = new HashMap<>(); //map que guarda os livros numa estrutura Isbn:livro
+    public Map<String, Livro> getLivroMap(){
+        return livrosmap;
+    }
+    public long QuantidadeLivros(){
+        return (long)livrosmap.size();
+    }
     @Override
     public Livro create(Livro livro){ //criando um livro e colocando no map
-        int idlivro= livro.getIsbn(); //o id do livro vai ser o proprio isbn
-        livrosmap.put(idlivro, livro);
+        String id = livro.getIsbn(); //o id do livro vai ser o proprio isbn
+        livrosmap.put(id, livro);
         return livro;}
 
     @Override
@@ -20,7 +23,10 @@ public class LivroDAOImpl implements LivroDAO {
         return new ArrayList<>(livrosmap.values());}
 
     @Override
-    public Livro findById(int id) {  //retorna um livro pelo Id (id é o isbn)
+    public Livro findById(long id) {
+        return null;}
+
+    public Livro findById(String id) {  //retorna um livro pelo Id (id é o isbn)
         return livrosmap.get(id);}
 
     @Override
@@ -30,33 +36,38 @@ public class LivroDAOImpl implements LivroDAO {
 
     @Override
     public void delete(Livro obj) {
-        int id = obj.getIsbn();
+        String id = obj.getIsbn();
         livrosmap.remove(id);}
 
+    public void deleteMany(){
+        livrosmap.clear();
+    }
 
-    public Livro findTitulo(String titulo) {
-        for (Livro livro : livrosmap.values()) {
-            if (livro.getTitulo().equalsIgnoreCase(titulo)) {
-                return livro;
-            }
-        }
-        return null;
+    public List<Livro> findTitulo(String titulo) {
+        List<Livro> livrosTitulo = new ArrayList<>();
+        for (Livro livro : livrosmap.values())
+            if (livro.getTitulo().equalsIgnoreCase(titulo))
+                livrosTitulo.add(livro);
+        return livrosTitulo;
     }
-    public Livro findAutor(String autor) {
+
+    public List<Livro> findAutor(String autor) {
+        List<Livro> livrosAutor = new ArrayList<>();
         for (Livro livro : livrosmap.values()) {
-            if (livro.getAutor().equalsIgnoreCase(autor)) {
-                return livro;
+            if (livro.getAutor().equalsIgnoreCase(autor)){
+                livrosAutor.add(livro);
             }
         }
-        return null;
+        return livrosAutor;
     }
-    public Livro findCategoria(String categoria) {
+    public List<Livro> findCategoria(String categoria) {
+        List<Livro> livrosCategoria = new ArrayList<>();
         for (Livro livro : livrosmap.values()) {
-            if (livro.getCategoria().equalsIgnoreCase(categoria)) {
-                return livro;
+            if (livro.getCategoria().equalsIgnoreCase(categoria)){
+                livrosCategoria.add(livro);
             }
         }
-        return null;
+        return livrosCategoria;
     }
 
 }

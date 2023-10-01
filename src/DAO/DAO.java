@@ -1,37 +1,72 @@
 package DAO;
 
-import Model.Livro;
+
+import DAO.ADM.ADMDAO;
+import DAO.ADM.ADMDAOImpl;
+import DAO.Bibliotecario.BibliotecarioDAO;
+import DAO.Bibliotecario.BibliotecarioDAOImpl;
+import DAO.Leitor.LeitorDAO;
+import DAO.Leitor.LeitorDAOImpl;
 import DAO.Livro.LivroDAO;
 import DAO.Livro.LivroDAOImpl;
 
 import DAO.Emprestimo.EmprestimoDAO;
 import DAO.Emprestimo.EmprestimoDAOImpl;
-import Model.Emprestimo;
+
+
+import DAO.Relatorios.RelatoriosDAO;
+import DAO.Relatorios.RelatoriosDAOImpl;
 
 public class DAO {
     private static LivroDAO livroDAO;
-    //private static PessoaDAO pessoaDAO;
+    private static RelatoriosDAO pessoaDAO;
     private static EmprestimoDAO emprestimoDAO;
 
-    public static LivroDAO getLivroDAO(){
+    private static BibliotecarioDAO bibliotecarioDAO;
+
+    private static ADMDAO admDAO;
+    private static LeitorDAO leitorDAO;
+
+
+    public static LivroDAO getLivroDAO() {
         if (livroDAO == null) {
             livroDAO = new LivroDAOImpl();
         }
         return livroDAO;
     }
 
-   /* public static PessoaDAO getUserDAO(){
-        if (PessoaDAO == null){
-            PessoaDAO = new PessoaDAOImpl();
+    public static RelatoriosDAO getPessoaDAO() {
+        if (pessoaDAO == null) {
+            pessoaDAO = new RelatoriosDAOImpl();
         }
         return pessoaDAO;
-    }*/
+    }
 
     public static EmprestimoDAO getEmprestimoDAO() {
-        if(emprestimoDAO == null) {
+        if (emprestimoDAO == null) {
             emprestimoDAO = new EmprestimoDAOImpl();
         }
         return emprestimoDAO;
     }
 
+    public static BibliotecarioDAO getBibliotecarioDAO() {
+        if (bibliotecarioDAO == null) {
+            bibliotecarioDAO = new BibliotecarioDAOImpl();
+        }
+        return bibliotecarioDAO;
+    }
+
+    public static ADMDAO getAdmDAO(){
+        if(admDAO == null){
+            admDAO = new ADMDAOImpl();
+        }
+        return admDAO;
+    }
+
+    public static LeitorDAO getLeitorDAO(){
+        if(leitorDAO == null){
+            leitorDAO = new LeitorDAOImpl();
+        }
+        return leitorDAO;
+    }
 }

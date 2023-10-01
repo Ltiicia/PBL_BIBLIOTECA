@@ -4,10 +4,10 @@ import DAO.CRUD;
 import Model.Leitor;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface EmprestimoDAO extends CRUD<Emprestimo, Exception> {
-    public Emprestimo returnEmprestimo(Emprestimo emprestimo);
-
-    //public List<Emprestimo> findByLeitor(Leitor leitor);
+    public Map<Long, Emprestimo> getEmprestimoMap();
+    public long getProxId();
 }

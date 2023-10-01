@@ -12,6 +12,6 @@ public interface CRUD <T, E extends Exception>{
 
     public List<T> findMany(); //retorna lista de obj
 
-    public T findById(int id); // retorna um obj
-
+    public T findById(long id); // retorna um obj
+    public void deleteMany();
 }

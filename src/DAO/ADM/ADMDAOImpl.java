@@ -8,18 +8,23 @@ import java.util.List;
 import java.util.HashMap;
 
 public class ADMDAOImpl implements ADMDAO{
-    private final Map<Integer, ADM> AdmMap = new HashMap<>();
+    private final Map<Long, ADM> AdmMap = new HashMap<>();
 
+    private long proxId = 0;
+
+    public long getProxId(){
+        return this.proxId++;
+    }
     @Override
     public ADM create(ADM Adm) {
-        int id = Adm.getId();
-        AdmMap.put(id, Adm);
+        Adm.setId(getProxId());
+        AdmMap.put(Adm.getId(), Adm);
         return Adm;
     }
 
     @Override
     public void delete(ADM Adm) {
-        int id = Adm.getId();
+        long id = Adm.getId();
         AdmMap.remove(id);
     }
 
@@ -35,7 +40,11 @@ public class ADMDAOImpl implements ADMDAO{
     }
 
     @Override
-    public ADM findById(int id) {
+    public ADM findById(long id) {
         return AdmMap.get(id);
+    }
+
+    public void deleteMany(){
+        AdmMap.clear();
     }
 }

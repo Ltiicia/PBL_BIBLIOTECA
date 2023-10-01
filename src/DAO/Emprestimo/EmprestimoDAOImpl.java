@@ -10,11 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 public class EmprestimoDAOImpl implements EmprestimoDAO {
-    private final Map<Integer, Emprestimo> emprestimoMap = new HashMap<>();
+    private final Map<Long, Emprestimo> emprestimoMap = new HashMap<>();
 
-    private List<Emprestimo> emprestimos;
+    public Map<Long, Emprestimo> getEmprestimoMap() { //para retornar o banco de dados com todos livros cadastrados em  formato map
+        return emprestimoMap;
+    }
+    private long proxId = 0;
+
+    public long getProxId() {
+        return proxId++;
+    }
+
     public Emprestimo create(Emprestimo emprestimo){
-        int id = emprestimo.getIdEmprestimo();
+        long id = emprestimo.getIdEmprestimo();
         emprestimoMap.put(id, emprestimo);
         return emprestimo;
     }
@@ -24,10 +32,17 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
         return new ArrayList<>(emprestimoMap.values());
     }
 
-    @Override
-    public Emprestimo findById(int id){
 
-        return emprestimoMap.get(id);
+
+    @Override
+    public Emprestimo findById(long id){
+        try {
+            return emprestimoMap.get(id);
+        } catch (Exception e){
+            System.out.println("Emprestimo não encontrado");
+            return null;
+        }
+
     }
 
     @Override
@@ -38,23 +53,11 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
 
     @Override
     public void delete(Emprestimo emprestimo){
-        int id = emprestimo.getIdEmprestimo();
+        long id = emprestimo.getIdEmprestimo();
         emprestimoMap.remove(id);
     }
-    @Override
-    public Emprestimo returnEmprestimo(Emprestimo emprestimo){
 
-        return emprestimo;
+    public void deleteMany(){
+        emprestimoMap.clear();
     }
-
-    /*
-    @Override
-    public List<Emprestimo> findByLeitor(Leitor leitor) {
-        emprestimosLeitor = new ArrayList<>(emprestimoMap.values());
-        for(Emprestimo emprestimosLeitor: emprestimoMap.values()){
-            if(emprestimosLeitor.getLeitor().equals(leitor.getId()))
-                emprestimosLeitor.add(emprestimosLeitor);
-        }
-        return emprestimosLeitor;
-    }*/
 }

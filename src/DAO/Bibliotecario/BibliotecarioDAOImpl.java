@@ -9,19 +9,36 @@ import java.util.Map;
 
 public class BibliotecarioDAOImpl implements BibliotecarioDAO{
 
-    private final Map<Integer, Bibliotecario> bibliotecarioMap = new HashMap<>();
+    private final Map<Long, Bibliotecario> bibliotecarioMap = new HashMap<>();
+
+    private long proxId = 0;
+
+    @Override
+    public long getProxId() {
+        return proxId++;
+    }
+
+    @Override
+    public Map<Long, Bibliotecario> getBibliotecarioMap() {
+        return bibliotecarioMap;
+    }
 
     @Override
     public Bibliotecario create(Bibliotecario bibliotecario) {
-        int id = bibliotecario.getId();
-        bibliotecarioMap.put(id, bibliotecario);
+        bibliotecario.setId(getProxId());
+        bibliotecarioMap.put(bibliotecario.getId(), bibliotecario);
         return bibliotecario;
     }
 
     @Override
     public void delete(Bibliotecario bibliotecario) {
-        int id = bibliotecario.getId();
+        long id = bibliotecario.getId();
         bibliotecarioMap.remove(id);
+    }
+
+    @Override
+    public void deleteMany() {
+        bibliotecarioMap.clear();
     }
 
     @Override
@@ -36,7 +53,7 @@ public class BibliotecarioDAOImpl implements BibliotecarioDAO{
     }
 
     @Override
-    public Bibliotecario findById(int id) {
+    public Bibliotecario findById(long id) {
         return bibliotecarioMap.get(id);
     }
 

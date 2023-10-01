@@ -11,18 +11,22 @@ import java.util.Map;
 
 public class LeitorDAOImpl implements LeitorDAO {
 
-    private final Map<Integer, Leitor> leitorMap = new HashMap<>();
+    private final Map<Long, Leitor> leitorMap = new HashMap<>();
+    private long proxId = 0;
+
+    public long getProxId(){
+        return this.proxId++;
+    }
     @Override
     public Leitor create(Leitor leitor) {
-        int id = leitor.getId();
-        leitorMap.put(id, leitor);
+        leitor.setId(getProxId());
+        leitorMap.put(leitor.getId(), leitor);
         return leitor;
     }
 
     @Override
     public void delete(Leitor leitor) {
-        int id = leitor.getId();
-        leitorMap.remove(id);
+        leitorMap.remove(leitor.getId());
     }
 
     @Override
@@ -37,8 +41,18 @@ public class LeitorDAOImpl implements LeitorDAO {
     }
 
     @Override
-    public Leitor findById(int id) {
+    public void deleteMany(){
+        leitorMap.clear();
+    }
+
+    @Override
+    public Leitor findById(long id) {
         return leitorMap.get(id);
     }
+    @Override
+    public Map<Long, Leitor> getReaderMap() {
+        return leitorMap;
+    }
+
 
 }
