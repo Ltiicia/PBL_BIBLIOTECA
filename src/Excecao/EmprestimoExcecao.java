@@ -14,6 +14,9 @@ public class EmprestimoExcecao extends Exception{
     //fila de emprestimo já tem gente
     public static final String FilaEmprestimo = "Já há pessoas na fila";
 
+    //emprestar a leitor bloqueado
+    public static final String LeitorBloqueadoEmprestimo = "Este leitor está bloqueado. ";
+
     //
     public static final String SemEmprestimo = "Nenhum emprestimo feito. ";
 

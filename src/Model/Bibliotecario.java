@@ -90,7 +90,7 @@ public class Bibliotecario extends Pessoa {
         DAO.getLivroDAO().create(newLivro); // criou o livro e o armazenou no map tendo o seu isbn como id
         //System.out.println("\nsuccessfully registered book!");
     }
-    public void registerDevolution(Emprestimo emprestimo, Leitor leitor){
+    public void registroDevolucao(Emprestimo emprestimo, Leitor leitor){
         if(emprestimo.getAtivo()) { //se o emprestimo estiver ativo
             // verificar se a data de devolução condiz com o esperado
             LocalDate now = LocalDate.now();
