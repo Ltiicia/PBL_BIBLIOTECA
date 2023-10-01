@@ -6,18 +6,16 @@ import Model.Livro;
 import java.util.List;
 
 public class Estoque {
-    private int numLivros;
 
     public Estoque(int numLivros) {
-        this.numLivros = numLivros;
     }
 
     public Livro addLivro(Livro newLivro){
-        return DAO.getLivroDAO().creat(newLivro);
+        return DAO.getLivroDAO().create(newLivro);
     }
 
     public void deleteLivro(Livro livro){
-        DAO.getBookDAO().delete(livro);
+        DAO.getLivroDAO().delete(livro);
     }
 
     /*
@@ -36,7 +34,7 @@ public class Estoque {
     }
 
     public List<Livro> getLivro(){
-        return DAO.getLivroDAO().findAll();
+        return DAO.getLivroDAO().findMany();
     }
 
 }
