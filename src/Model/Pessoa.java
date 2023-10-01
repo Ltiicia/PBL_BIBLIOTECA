@@ -1,5 +1,10 @@
 package Model;
 
+import java.util.List;
+import DAO.DAO.livroDAO;
+
+import static DAO.DAO.livroDAO;
+
 public class Pessoa {
     private String nome;
     private long id;
@@ -80,5 +85,20 @@ public class Pessoa {
         }
         Pessoa pessoa = (Pessoa) obj;
         return id == pessoa.id;
+    }
+
+    public List<Livro> procuraPorTitulo(String titulo) {
+        // Chama o método de pesquisa por título no DAO de livros
+        return livroDAO.findTitulo(titulo);
+    }
+
+    public List<Livro> procuraPorAutor(String autor) {
+        // Chama o método de pesquisa por autor no DAO de livros
+        return livroDAO.findAutor(autor);
+    }
+
+    public List<Livro> procuraPorCategoria(String categoria) {
+        // Chama o método de pesquisa por categoria no DAO de livros
+        return livroDAO.findCategoria(categoria);
     }
 }

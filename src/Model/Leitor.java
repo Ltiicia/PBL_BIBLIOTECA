@@ -4,6 +4,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import DAO.Leitor.LeitorDAO;
+import Excecao.EmprestimoExcecao;
+import Excecao.LivroExcecao;
+
 public class Leitor extends Pessoa{  //leitor
     public Boolean block;
 
@@ -32,7 +35,7 @@ public class Leitor extends Pessoa{  //leitor
 
     public void reservaLivro(Leitor leitor, Livro livro){
         if(livro.getQuantidadeDisponivel() > 0){
-            //throw new LivroException(LivroException.Available); //logo, vc pode ir fazer o emprestimo com o bibliotecario
+            throw new LivroExcecao(LivroExcecao.Available); //logo, vc pode ir fazer o emprestimo com o bibliotecario
         }
         else{
             livro.addReservaFila(leitor); }
@@ -46,27 +49,27 @@ public class Leitor extends Pessoa{  //leitor
         return data.plusDays(7);
     }
 
-   /* public void renova_emprestimo(Emprestimo emprestimo, Livro livro) { //EM DESENVOLVIMENTO
-        Leitor leitor = LeitorDAO.findById(emprestimo.getIdLeitor()); //retorna o leitor do banco de dados de acordo com o Id
+    public void renova_emprestimo(Leitor leitor, Emprestimo emprestimo, Livro livro) throws EmprestimoExcecao {
         if (!emprestimo.getAtivo()) { //se for falso
-            //  throw new EmprestimoException(EmprestimoException.FinalizedEmprestimo);}
+              throw new EmprestimoExcecao(EmprestimoExcecao.FinalizedEmprestimo);}
         else if (livro.getReservaFila().isEmpty()) { //se contém elementos na fila, logo contém pessoas
-                // throw new EmprestimoException(EmprestimoException.ContainsPeople);}
+                throw new EmprestimoExcecao(EmprestimoExcecao.ContainsPeople);}
         else if (leitor.getBlock()) {
-                    // throw new EmprestimoException(EmprestimoException.UserBlock);}
+                     throw new EmprestimoExcecao(EmprestimoExcecao.UserBlock);}
         else if (emprestimo.getRenovacaoQuantidade() == 3) {
-                        //throw new EmprestimoException(EmprestimoException.RenewalExceeded);
+                        throw new EmprestimoExcecao(EmprestimoExcecao.RenewalExceeded);
                     } else {
                         emprestimo.setRenovacaoQuantidade(1); //soma uma renovação
                         emprestimo.setDataDevolucao(datafinal(emprestimo.getDataDevolucao())); //pega a data final e soma + 10 dias, e fica sendo a nova data devolução
                     }
-                }*/
+        }
 
     public boolean desbloqueia (Leitor leitor){
         LocalDate now = LocalDate.now();
-        if (now.isAfter(leitor.prazo)) { // se o dia atual é depois do prazo da multa
-            leitor.block = false; // leitor é desbloqueado
-            leitor.prazo = null; // retira a data referente a multa
+        if (prazo != null)
+            if (now.isAfter(leitor.prazo)) { // se o dia atual é depois do prazo da multa
+                leitor.block = false; // leitor é desbloqueado
+                leitor.prazo = null; // retira a data referente a multa
         }
         return leitor.block;
     }

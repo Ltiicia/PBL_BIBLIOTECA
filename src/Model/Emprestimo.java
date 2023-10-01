@@ -9,20 +9,19 @@ public class Emprestimo {
 
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
-    private boolean ativo;
+    private boolean ativo = true;
     private int renovacaoQuantidade;
 
 
 
-    public Emprestimo(int idEmprestimo, int idLeitor, Livro livro, LocalDate dataEmprestimo, LocalDate dataDevolucao,boolean ativo, int renovacaoQuantidade) {
+    public Emprestimo(long idEmprestimo, long idLeitor, Livro livro, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.idEmprestimo = idEmprestimo;
         this.idLeitor = idLeitor;
         this.livro = livro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
-        this.ativo = ativo;
-        this.renovacaoQuantidade = renovacaoQuantidade;
     }
+
     public long getIdEmprestimo() {
         return idEmprestimo;
     }
@@ -71,7 +70,7 @@ public class Emprestimo {
     }
 
     public void setRenovacaoQuantidade(int renovacaoQuantidade){
-        this.renovacaoQuantidade = renovacaoQuantidade;
+        this.renovacaoQuantidade += renovacaoQuantidade;
 
     }
 }

@@ -9,6 +9,10 @@ import DAO.Livro.LivroDAOImpl;
 import DAO.ADM.ADMDAOImpl;
 
 import DAO.Bibliotecario.BibliotecarioDAO;
+import Excecao.PessoaExcecao;
+
+import java.text.ParseException;
+
 public class ADM extends Bibliotecario{
 
     LeitorDAOImpl leitorDAO = new LeitorDAOImpl();
@@ -92,9 +96,12 @@ public class ADM extends Bibliotecario{
      * @param reader O leitor a ser bloqueado.
      * @throws UsersException se ocorrer um erro durante o bloqueio do leitor.
      */
-    public void blockLeitor(Leitor leitor) throws UsersException{
-        if(leitor.getBlock()){throw new UsersException(UsersException.AlreadyUserBlock);}
-        else{leitor.bloqueiaLeitor(leitor);}
+    public void blockLeitor(Leitor leitor) throws PessoaExcecao{
+        if(leitor.getBlock()){
+            throw new PessoaExcecao(PessoaExcecao.AlreadyUserBlock);
+        } else{
+            leitor.bloqueiaLeitor(leitor);
+        }}
 
     /**
      * Desbloqueia um leitor no sistema.
@@ -102,33 +109,34 @@ public class ADM extends Bibliotecario{
      * @param reader O leitor a ser desbloqueado.
      * @throws UsersException se ocorrer um erro durante o desbloqueio do leitor.
      */
-    public void desbloqueiaLeitor(Leitor leitor) throws UsersException {
-        if(!leitor.getBlock()){throw new UsersException(UsersException.AlreadyUserUnlock);}
-        else{leitor.desbloqueiaLeitor(leitor);}
-
+    public void desbloqueiaLeitor(Leitor leitor) throws PessoaExcecao {
+            if (!leitor.getBlock()) {
+                throw new PessoaExcecao(PessoaExcecao.AlreadyUserUnlock);
+            } else {
+                leitor.desbloqueiaLeitor(leitor);
+            }
+        }
 
     //GERENCIAMENTO DO ACERVO - a adição de livros o adm herda do bibliotecario
 
-    /**
-     * Remove um livro do sistema.
-     *
-     * @param book O livro a ser removido.
-     */
     public void removeLivro(Livro livro){
         livros.delete(livro);
     }
+
+
 
     /**
      * Atualiza as informações de um livro no sistema.
      *
      * @param book O livro a ser atualizado.
      */
-    public void updateBook(Book book){books.update(book);}
+    public void updateBook(Livro livro){
+        livros.update(livro);}
 
     /**
      * Obtém a quantidade total de livros no sistema.
      */
-    public void quantityBooks(){books.QuantityBooks();}
+    public void quantityBooks(){
+        livros.QuantidadeLivros();}
 }
 
-}
