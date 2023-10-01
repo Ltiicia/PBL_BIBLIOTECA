@@ -12,7 +12,7 @@ public class Bibliotecario extends Pessoa {
     private int generateId(int idEmprestimo){ //Gera id automaticamente
         return idEmprestimo+=1;
     }
-    public Bibliotecario(String nome, int id, String senha, int idade, int celular, String endereco) {
+    public Bibliotecario(String nome, long id, String senha, int idade, String celular, String endereco) {
         super(nome, id, senha, idade, celular, endereco);
     }
     public Date datahoje(){

@@ -1,5 +1,6 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,13 +9,15 @@ public class Livro {
     private String titulo;
     private String autor;
     private String editora;
-    private int isbn;
-    private Date anoPublicacao;
+    private String isbn;
+    private int anoPublicacao;
     private String categoria;
     private LocalizaLivro localizacao;
-    private int quantidade;
+    private int quantidadeDisponivel;
+    private int quantidadetotal;
+    private int quantidadeEmprestimo = 0;
     private Queue<Leitor> reservaFila = new LinkedList<>();
-    public Livro(String titulo, String autor, String editora, int isbn, Date anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
+    public Livro(String titulo, String autor, String editora, String isbn, int anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
@@ -22,12 +25,19 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
         this.categoria = categoria;
         this.localizacao = localizacao;
-        this.quantidade = quantidade;
+        this.quantidadeDisponivel = quantidade;
+        this.quantidadetotal = quantidade;
 
     }
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     public void addReservaFila(Leitor leitor){  // Adicionando leitores à fila do livro
         reservaFila.offer(leitor);}
+
+    public void removeReservaFila(Leitor leitor){ // removendo leitores da fila
+        reservaFila.remove(leitor);
+    }
+
 
     // Métodos getter para acessar os atributos
     public String getTitulo() {
@@ -42,11 +52,11 @@ public class Livro {
 
         return editora;
     }
-    public Integer getIsbn() {
+    public String getIsbn() {
 
         return isbn;
     }
-    public Date getAnoPublicacao() {
+    public int getAnoPublicacao() {
 
         return anoPublicacao;
     }
@@ -57,10 +67,21 @@ public class Livro {
     public LocalizaLivro getLocalizacao(){
         return localizacao;
     }
-    public int getQuantidade(){
-        return quantidade;
+    public int getQuantidadeDisponivel(){
+        return quantidadeDisponivel;
     }
 
+    public int getQuantidadetotal() {
+        return quantidadetotal;
+    }
+
+    public int getQuantidadeEmprestimo() {
+        return quantidadeEmprestimo;
+    }
+
+    public Queue<Leitor> getReservaFila(){
+        return reservaFila;
+    }
     // Métodos setter para definir os atributos (caso seja necessário)
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -71,10 +92,10 @@ public class Livro {
     public void setEditora(String editora) {
         this.editora = editora;
     }
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    public void setAnoPublicacao(Date anoPublicacao) {
+    public void setAnoPublicacao(int anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
     }
     public void setCategoria(String categoria) {
@@ -84,29 +105,22 @@ public class Livro {
         this.localizacao = localizacao;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeDisponivel(int quantidadeDisponivel) {
+        this.quantidadeDisponivel = quantidadeDisponivel;
     }
 
-
-    public void alterarTitulo(){
-
+    public void setQuantidadetotal(int quantidadetotal) {
+        this.quantidadetotal = quantidadetotal;
     }
-    public void alterarAutor(){
 
+    public void setQuantidadeEmprestimo(int quantidadeEmprestimo) {
+        this.quantidadeEmprestimo = quantidadeEmprestimo;
     }
-    public void alterarEditora(){
 
+    public void setReservaFila(Queue<Leitor> reservaFila) {
+        this.reservaFila = reservaFila;
     }
-    public void alterarIsbn(){
 
-    }
-    public void alterarAnoDePubli(){
-
-    }
-    public void alterarCategoria(){
-
-    }
     @Override
     public String toString() {
         return "Model.DAO.Livro{" +

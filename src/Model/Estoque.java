@@ -13,17 +13,12 @@ public class Estoque {
     }
 
     public Livro addLivro(Livro newLivro){
-        return DAO.getLivroDAO().creat(newLivro);
+        return DAO.getLivroDAO().create(newLivro);
     }
 
     public void deleteLivro(Livro livro){
-        DAO.getBookDAO().delete(livro);
+        DAO.getLivroDAO().delete(livro);
     }
-
-    /*
-    public void deleteAll(){ // não implementado
-        DAO.getLivroDAO().apagarTodos();
-    */
 
     public Livro updateLivro(Livro livro){
 
@@ -36,7 +31,7 @@ public class Estoque {
     }
 
     public List<Livro> getLivro(){
-        return DAO.getLivroDAO().findAll();
+        return DAO.getLivroDAO().findMany();
     }
 
 }

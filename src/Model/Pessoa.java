@@ -2,13 +2,13 @@ package Model;
 
 public class Pessoa {
     private String nome;
-    private int id;
+    private long id;
     private String senha;
     private int idade;
-    private int celular;
+    private String celular;
     private String endereco;
 
-    public Pessoa(String nome, int id, String senha, int idade, int celular, String endereco){  //construtor
+    public Pessoa(String nome, long id, String senha, int idade, String celular, String endereco){  //construtor
         this.nome = nome;
         this.id = -1;  //ALTERADO NA CLASSE PESSOADAOIMPL
         this.senha = senha;
@@ -21,7 +21,7 @@ public class Pessoa {
 
         return nome;
     }
-    public int getId() {
+    public long getId() {
 
         return id;
     }
@@ -33,7 +33,7 @@ public class Pessoa {
 
         return idade;
     }
-    public int getCelular() {
+    public String getCelular() {
 
         return celular;
     }
@@ -46,7 +46,7 @@ public class Pessoa {
 
         this.nome = nome;
     }
-    public void setId(int id) {
+    public void setId(long id) {
 
         this.id = id;
     }
@@ -58,7 +58,7 @@ public class Pessoa {
 
         this.idade = idade;
     }
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
 
         this.celular = celular;
     }

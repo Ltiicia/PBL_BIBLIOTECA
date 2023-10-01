@@ -1,46 +1,57 @@
 package Model;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Emprestimo {
-    private int idEmprestimo;
-    private int idLeitor;
+    private long idEmprestimo;
+    private long idLeitor;
     private Livro livro;
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
+
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
+    private boolean ativo;
     private int renovacaoQuantidade;
 
-    public Emprestimo(int idEmprestimo, int idLeitor, Livro livro, Date dataEmprestimo, Date dataDevolucao, int renovacaoQuantidade) {
+
+
+    public Emprestimo(int idEmprestimo, int idLeitor, Livro livro, LocalDate dataEmprestimo, LocalDate dataDevolucao,boolean ativo, int renovacaoQuantidade) {
         this.idEmprestimo = idEmprestimo;
         this.idLeitor = idLeitor;
         this.livro = livro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
+        this.ativo = ativo;
         this.renovacaoQuantidade = renovacaoQuantidade;
     }
-    public int getIdEmprestimo() {
+    public long getIdEmprestimo() {
         return idEmprestimo;
     }
-    public int getIdLeitor(){
+    public long getIdLeitor(){
         return idLeitor;
     }
     public Livro getLivro(){
         return livro;
     }
-    public Date getDataEmprestimo(){
+    public LocalDate getDataEmprestimo(){
         return dataEmprestimo;
     }
-    public Date getDataDevolucao(){
+    public LocalDate getDataDevolucao(){
         return dataDevolucao;
     }
+
+    public boolean getAtivo() {
+        return ativo;
+    }
+
     public int getRenovacaoQuantidade(){
         return renovacaoQuantidade;
     }
 
     //MÉTODOS SET
-    public void setIdEmprestimo(int idEmprestimo){
+    public void setIdEmprestimo(long idEmprestimo){
         this.idEmprestimo = idEmprestimo;
     }
-    public void setIdLeitor(int idLeitor){
+    public void setIdLeitor(long idLeitor){
         this.idLeitor = idLeitor;
     }
 
@@ -48,12 +59,17 @@ public class Emprestimo {
         this.livro = livro;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo){
+    public void setDataEmprestimo(LocalDate dataEmprestimo){
         this.dataEmprestimo = dataEmprestimo;
     }
-    public void setDataDevolucao(Date dataDevolucao){
+    public void setDataDevolucao(LocalDate dataDevolucao){
         this.dataDevolucao = dataDevolucao;
     }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     public void setRenovacaoQuantidade(int renovacaoQuantidade){
         this.renovacaoQuantidade = renovacaoQuantidade;
 
