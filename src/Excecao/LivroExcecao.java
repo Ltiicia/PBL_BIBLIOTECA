@@ -1,6 +1,11 @@
 package Excecao;
 
 public class LivroExcecao extends Exception{
+
+    //disponibilidade de um livro
+    public static final String Disponivel = "Este livro está disponível. ";
+    public static final String Indisponivel = "Esse livro está indisponível. ";
+
     //emprestar livro emprestado
     public static final String LivroJaEmprestado = "Este livro está emprestado no momento. ";
 
@@ -17,7 +22,15 @@ public class LivroExcecao extends Exception{
     public static final String ErroIsbn = "Erro no ISBN. ";
 
     //
+    public static final String ErroNaQuantidade = "A quantidade tem que ser maior que 0.";
 
-    public LivroExcecao(String message){
+    //dados para relatório
+    public static final String SemLivrosEmprestados = "Nenhum livro emprestado. ";
+    public static final String SemLivrosReservados = "Nenhum livro reservado. ";
+    public static final String SemLivrosAtrasados = "Nenhum livro atrasado. ";
+
+
+    public LivroExcecao(String message) {
         super(message);
+    }
 }
