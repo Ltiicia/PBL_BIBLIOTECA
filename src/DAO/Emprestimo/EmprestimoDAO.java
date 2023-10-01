@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface EmprestimoDAO extends CRUD<Emprestimo, Exception> {
+public interface EmprestimoDAO extends CRUD<Emprestimo> {
     public Map<Long, Emprestimo> getEmprestimoMap();
     public long getProxId();
 }

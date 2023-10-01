@@ -22,7 +22,7 @@ public class EmprestimoDAOImpl implements EmprestimoDAO {
     }
 
 
-    
+
     //dicionario p/ guardar os emprestimos
 
     private List<Emprestimo> emprestimos;

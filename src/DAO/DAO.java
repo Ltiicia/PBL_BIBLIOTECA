@@ -18,8 +18,8 @@ import DAO.Relatorios.RelatoriosDAO;
 import DAO.Relatorios.RelatoriosDAOImpl;
 
 public class DAO {
-    private static LivroDAO livroDAO;
-    private static RelatoriosDAO pessoaDAO;
+    public static LivroDAO livroDAO;
+    private static RelatoriosDAO relatoriosDAO;
     private static EmprestimoDAO emprestimoDAO;
 
     private static BibliotecarioDAO bibliotecarioDAO;
@@ -35,11 +35,11 @@ public class DAO {
         return livroDAO;
     }
 
-    public static RelatoriosDAO getPessoaDAO() {
-        if (pessoaDAO == null) {
-            pessoaDAO = new RelatoriosDAOImpl();
+    public static RelatoriosDAO getRelatoriosDAO() {
+        if (relatoriosDAO == null) {
+            relatoriosDAO = new RelatoriosDAOImpl();
         }
-        return pessoaDAO;
+        return relatoriosDAO;
     }
 
     public static EmprestimoDAO getEmprestimoDAO() {
