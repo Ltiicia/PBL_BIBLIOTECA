@@ -9,12 +9,16 @@ import java.util.HashMap;
 
 public class ADMDAOImpl implements ADMDAO{
     private final Map<Long, ADM> AdmMap = new HashMap<>();
-
+    //HashMap que guarda todos ADMs cadastrados (id:ADM)
     private long proxId = 0;
 
     public long getProxId(){
-        return this.proxId++;
+
+        return this.proxId++;// retorna Id para o objeto
+        // define o próximo Id incrementando do anterior
     }
+
+    //Métodos CRUD
     @Override
     public ADM create(ADM Adm) {
         Adm.setId(getProxId());

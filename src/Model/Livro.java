@@ -5,6 +5,21 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
+/**
+ * A classe contém atributos para armazenar os
+ * dados do livro. Portanto ela contém os atributos
+ * de um livro como nome, isbn, autor, ano de publicação
+ * categoria, localização na biblioteca, quantidade total
+ * do livro, uma fila de reserva e quantidade de vezes
+ * que aquele livro já foi emprestado. Além disso, ela
+ * contém um construtor para criar o objeto e métodos getters
+ * e setters para obter e alterar os atributos privados.
+ * Contém outros métodos uteis para classe livro como
+ * entrar e sair da fila de reserva.
+ *
+ * @author Letícia Gonçalves e Helena Filemon
+ */
 public class Livro {
     private String titulo;
     private String autor;
@@ -17,6 +32,18 @@ public class Livro {
     private int quantidadetotal;
     private int quantidadeEmprestimo = 0;
     private Queue<Leitor> reservaFila = new LinkedList<>();
+
+    /**
+     * Construtor da classe Livro
+     * @param titulo                Titulo do livro
+     * @param autor                 Autor do livro
+     * @param editora               Editora do livro
+     * @param isbn                  Isbn do livro
+     * @param anoPublicacao         Ano de Publicacao
+     * @param categoria             Categoria
+     * @param localizacao           Localizacao
+     * @param quantidade            Quantidade
+     */
     public Livro(String titulo, String autor, String editora, String isbn, int anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
         this.titulo = titulo;
         this.autor = autor;
@@ -29,11 +56,18 @@ public class Livro {
         this.quantidadetotal = quantidade;
 
     }
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
+    /**
+     * Adiciona leitor a fila de reserva do livro
+     * @param leitor leitor
+     */
     public void addReservaFila(Leitor leitor){  // Adicionando leitores à fila do livro
         reservaFila.offer(leitor);}
 
+    /**
+     * Remove leitor da fila de reserva do livro.
+     * @param leitor leitor
+     */
     public void removeReservaFila(Leitor leitor){ // removendo leitores da fila
         reservaFila.remove(leitor);
     }

@@ -2,6 +2,17 @@ package Model;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ *A classe Emprestimo contém atributos para a realização do
+ *emprestimo, como, id do leitor, id do emprestimo, livro, data de
+ *devolução, data de emprestimo, quantidade de
+ *renovações um booleano que indica se o emprestimo está ativo ou não.
+ *Além disso, ela contém um construtor para criar o
+ *objeto e métodos getters e setters para obter e alterar
+ *os atributos privados.
+ *
+ * @author Letícia Gonçalves e Helena Filemon
+ */
 public class Emprestimo {
     private long idEmprestimo;
     private long idLeitor;
@@ -12,7 +23,14 @@ public class Emprestimo {
     private boolean ativo = true;
     private int renovacaoQuantidade;
 
-
+    /**
+     * Construtor da Classe Emprestimo
+     * @param idEmprestimo          Id do emprestimo
+     * @param idLeitor              Id do leitor
+     * @param livro                 Livro emprestado
+     * @param dataEmprestimo        Data do emprestimo
+     * @param dataDevolucao         Data da devolução
+     */
 
     public Emprestimo(long idEmprestimo, long idLeitor, Livro livro, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.idEmprestimo = idEmprestimo;
@@ -22,6 +40,7 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
+    //Métodos get
     public long getIdEmprestimo() {
         return idEmprestimo;
     }

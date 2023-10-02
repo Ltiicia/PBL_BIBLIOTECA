@@ -17,6 +17,10 @@ import DAO.Emprestimo.EmprestimoDAOImpl;
 import DAO.Relatorios.RelatoriosDAO;
 import DAO.Relatorios.RelatoriosDAOImpl;
 
+/*A classe DAO é usada para acessar os objetos DAO nas classes específicas.
+Para facilitar o acesso e tornar o código mais fácil de manter.
+Podendo usá-lo para acessar os dados do cliente.*/
+
 public class DAO {
     public static LivroDAO livroDAO;
     private static RelatoriosDAO relatoriosDAO;

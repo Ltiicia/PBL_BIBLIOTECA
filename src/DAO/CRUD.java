@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface CRUD <T>{
 
+    //Interface que contem os métodos utilizados nas interfaces DAO
     public T create(T obj);
 
     public void delete(T obj);

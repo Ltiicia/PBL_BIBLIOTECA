@@ -52,36 +52,34 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
      * Cria um novo leitor.
      *
      * @param nome        nome do leitor.
-     * @param id
      * @param senha        senha do leitor
-     * @param idade     .
+     * @param idade        idade do leitor
      * @param celular   O número de telefone do leitor.
      * @param endereco O endereço do leitor.
-     * @return O leitor recém-criado.
+     * @return leitor
      */
     public Leitor createLeitor(String nome, String senha, int idade, String celular, String endereco){
-        long id = leitorDAO.getProxId(); //ADD NA DAO LEITOR
-        Leitor reader = new Leitor(nome, id, senha, idade, celular, endereco);
-        //adicionar o reader ao banco de dados - falta fazer o dao reader
+        long id = leitorDAO.getProxId();
+        Leitor leitor = new Leitor(nome, id, senha, idade, celular, endereco);
         LeitorDAO leitorDao = DAO.getLeitorDAO();
-        leitorDao.create(reader); //criou o book no banco de dados e armazenou no map tendo o seu id como chave
-        return reader;}
+        leitorDao.create(leitor);
+        return leitor;}
 
     /**
      * Cria um novo bibliotecário no sistema.
      *
-     * @param name    O nome do bibliotecário.
-     * @param pin     A senha do bibliotecário.
-     * @param phone   O número de telefone do bibliotecário.
-     * @param address O endereço do bibliotecário.
-     * @return O bibliotecário recém-criado.
+     * @param nome    O nome do bibliotecário.
+     * @param senha     A senha do bibliotecário.
+     * @param idade       idade do bibliotecario
+     * @param celular   O número de telefone do bibliotecário.
+     * @param endereco O endereço do bibliotecário.
+     * @return O bibliotecário
      */
     public Bibliotecario createBibliotecario(String nome, String senha, int idade, String celular, String endereco){ //bibliotecario não tem id
         long id = bibliotecarioDAO.getProxId();
         Bibliotecario bibliotecario = new Bibliotecario(nome, id, senha, idade, celular, endereco);
-        //adicionar o reader ao banco de dados
         BibliotecarioDAO bibliotecarioDao = DAO.getBibliotecarioDAO();
-        bibliotecarioDao.create(bibliotecario); //criou o book no banco de dados e armazenou no map tendo o seu id como chave
+        bibliotecarioDao.create(bibliotecario);
         return bibliotecario;}
 
     /**
@@ -97,9 +95,8 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
     public ADM createAdm(String nome, String senha, int idade, String celular, String endereco){
         long id = admDAO.getProxId();
         ADM adm = new ADM(nome, id, senha, idade, celular, endereco);
-
         ADMDAO admDao = DAO.getAdmDAO();
-        admDao.create(adm); //criou o book no banco de dados e armazenou no map tendo o seu id como chave
+        admDao.create(adm);
         return adm;
     }
 
@@ -108,7 +105,7 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
     /**
      * Bloqueia um leitor no sistema.
      *
-     * @param leitor O leitor a ser bloqueado.
+     * @param leitor O leitor bloqueado.
      * @throws PessoaExcecao se ocorrer um erro durante o bloqueio do leitor.
      */
     public void blockLeitor(Leitor leitor) throws PessoaExcecao{
@@ -121,7 +118,7 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
     /**
      * Desbloqueia um leitor no sistema.
      *
-     * @param leitor O leitor a ser desbloqueado.
+     * @param leitor O leitor desbloqueado.
      * @throws PessoaExcecao se ocorrer um erro durante o desbloqueio do leitor.
      */
     public void desbloqueiaLeitor(Leitor leitor) throws PessoaExcecao {
@@ -132,26 +129,23 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
             }
         }
 
-    //GERENCIAMENTO DO ACERVO - a adição de livros o adm herda do bibliotecario
+    //GERENCIAMENTO DO ACERVO - ADM herda do bibliotecario -> adição de livros
 
     public void removeLivro(Livro livro){
-        livros.delete(livro);
+        livros.delete(livro);//deleta um livro do acervo
     }
-
-
-
     /**
-     * Atualiza as informações de um livro no sistema.
+     * Atualiza um livro do acervo.
      *
      * @param livro O livro a ser atualizado.
      */
-    public void updateBook(Livro livro){
+    public void updateLivro(Livro livro){
         livros.update(livro);}
 
     /**
-     * Obtém a quantidade total de livros no sistema.
+     * Obtém a quantidade livros no acervo.
      */
-    public void quantityBooks(){
+    public void quantidadeLivros(){
         livros.QuantidadeLivros();}
 }
 

@@ -5,18 +5,24 @@ import Model.Livro;
 import java.util.*;
 
 public class LivroDAOImpl implements LivroDAO {
-    private final Map<String, Livro> livrosmap = new HashMap<>(); //map que guarda os livros numa estrutura Isbn:livro
+    private final Map<String, Livro> livrosmap = new HashMap<>();
+    //HashMap que guarda todos livros cadastrados (id:livro)
+
     public Map<String, Livro> getLivroMap(){
         return livrosmap;
-    }
+    }//retorna todos os livros em formato Map
+
     public long QuantidadeLivros(){
         return (long)livrosmap.size();
-    }
+    }//retorna quantidade de livros
+
+    //Métodos CRUD
     @Override
     public Livro create(Livro livro){ //criando um livro e colocando no map
         String id = livro.getIsbn(); //o id do livro vai ser o proprio isbn
         livrosmap.put(id, livro);
-        return livro;}
+        return livro;
+    }
 
     @Override
     public List<Livro> findMany() { //retorna lista de livros
@@ -26,7 +32,8 @@ public class LivroDAOImpl implements LivroDAO {
     public Livro findById(long id) {
         return null;}
 
-    public Livro findById(String id) {  //retorna um livro pelo Id (id é o isbn)
+    public Livro findById(String id) {
+        //retorna um livro pelo isbn
         return livrosmap.get(id);}
 
     @Override
@@ -49,7 +56,7 @@ public class LivroDAOImpl implements LivroDAO {
             if (livro.getTitulo().equalsIgnoreCase(titulo))
                 livrosTitulo.add(livro);
         return livrosTitulo;
-    }
+    }//retorna lista de livros por titulo
 
     public List<Livro> findAutor(String autor) {
         List<Livro> livrosAutor = new ArrayList<>();
@@ -59,7 +66,8 @@ public class LivroDAOImpl implements LivroDAO {
             }
         }
         return livrosAutor;
-    }
+    }//retorna lista livros por autor
+
     public List<Livro> findCategoria(String categoria) {
         List<Livro> livrosCategoria = new ArrayList<>();
         for (Livro livro : livrosmap.values()) {
@@ -68,6 +76,6 @@ public class LivroDAOImpl implements LivroDAO {
             }
         }
         return livrosCategoria;
-    }
+    }//retorna lista de livros por categoria
 
 }

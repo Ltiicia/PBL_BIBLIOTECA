@@ -12,11 +12,20 @@ import java.util.Map;
 public class LeitorDAOImpl implements LeitorDAO {
 
     private final Map<Long, Leitor> leitorMap = new HashMap<>();
-    private long proxId = 0;
+    //HashMap que guarda todos leitores cadastrados (id:leitor)
 
+    @Override
+    public Map<Long, Leitor> getLeitorMap() {
+        return leitorMap;
+    }//retorna todos os Leitores em formato Map
+    private long proxId = 0;
     public long getProxId(){
-        return this.proxId++;
+        return this.proxId++;// retorna Id para o objeto
+        // define o próximo Id incrementando do anterior
     }
+
+
+    //Métodos CRUD
     @Override
     public Leitor create(Leitor leitor) {
         leitor.setId(getProxId());
@@ -49,10 +58,9 @@ public class LeitorDAOImpl implements LeitorDAO {
     public Leitor findById(long id) {
         return leitorMap.get(id);
     }
-    @Override
-    public Map<Long, Leitor> getLeitorMap() {
-        return leitorMap;
-    }
+
+
+
 
 
 }

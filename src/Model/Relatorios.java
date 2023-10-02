@@ -11,12 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A classe serve para armazenar dados para
+ * gerar os relatorios do sistema, contendo
+ * atributos como livros emprestados, livros atrasados,
+ * e livros reservados.
+ * Contém métodos para gerar os dados dos
+ * livros que estão emprestados, atrasados e reservados, e
+ * métodos para gerar o historico de um usuario especifico
+ * e pegar o livro mais popular.
+ *
+ * @author Letícia Gonçalves e Helena Filemon
+ */
 public class Relatorios {
     LivroDAOImpl livros = new LivroDAOImpl();
     EmprestimoDAOImpl emprestimos = new EmprestimoDAOImpl();
-    private List<Livro> livrosEmprestados; //armazena todos livros que estão emprestados no momento
-    private List<Livro> livrosAtrasados; //armazena todos livros que estão atrasados no momento
-    private List<Livro> livrosReservados; //armazena todos livros que já estão reservados no momento
+    private List<Livro> livrosEmprestados; //armazena livros que estão emprestados
+    private List<Livro> livrosAtrasados; //armazena livros que estão atrasados
+    private List<Livro> livrosReservados; //armazena livros que já estão reservados
+
 
     public Relatorios() {
         this.livrosEmprestados = new ArrayList<>();
@@ -24,15 +37,27 @@ public class Relatorios {
         this.livrosReservados = new ArrayList<>();
     }
 
+    /**
+     * Guarda os livros emprestados em uma lista
+     * @param livro livro
+     */
     public void guardaLivrosEmprestados(Livro livro) {
         livrosEmprestados.add(livro);
     }
 
+    /**
+     * Remove o livro da lista emprestados
+     * @param livro livro
+     */
     public void tiraLivrosEmprestados(Livro livro) {
         livrosAtrasados.remove(livro);
     }
 
-
+    /**
+     * Retorna a quantidade de livros emprestados
+     * @return quantidade livros emprestados
+     * @throws LivroExcecao
+     */
     public int quantidadeLivrosEmprestados() throws LivroExcecao {
         if (livrosEmprestados.isEmpty()) {
             throw new LivroExcecao(LivroExcecao.SemLivrosEmprestados);
@@ -41,7 +66,11 @@ public class Relatorios {
         }
     }
 
-
+    /**
+     * Retorna lista de livros emprestados
+     * @return lista de emprestados
+     * @throws LivroExcecao
+     */
     public List<Livro> geraLivrosEmprestados() throws LivroExcecao {
         if (livrosEmprestados.isEmpty()) {
             throw new LivroExcecao(LivroExcecao.SemLivrosEmprestados);
@@ -50,6 +79,11 @@ public class Relatorios {
         }
     }
 
+    /**
+     * Retorna lista de livros atrasados
+     * @return lista de atrasados
+     * @throws LivroExcecao exceção de livro
+     */
     public List<Livro> geraLivrosAtrasados() throws LivroExcecao {
         Map<Long, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
         for (Emprestimo emprestimo : emprestimoMap.values()) {
@@ -64,6 +98,12 @@ public class Relatorios {
             return livrosAtrasados;
         }
     }
+
+    /**
+     * Gera quantidade de livros atrasdos
+     * @return quantidade de atrasados
+     * @throws LivroExcecao
+     */
     public int quantidadeLivrosAtrasados() throws LivroExcecao {
         if (livrosAtrasados.isEmpty()) {
             throw new LivroExcecao(LivroExcecao.SemLivrosAtrasados);
@@ -72,7 +112,10 @@ public class Relatorios {
         }
     }
 
-
+    /**
+     * Retorna lista de livros reservados
+     * @return lista de reservados
+     */
     public List<Livro> geraReservos() {
         Map<String, Livro> livroMap = livros.getLivroMap();
         for (Livro livro : livroMap.values()) {
@@ -83,6 +126,11 @@ public class Relatorios {
         return livrosReservados;
     }
 
+    /**
+     * Gera quantidade de livros reservados
+     * @return quantidade de reservados
+     * @throws LivroExcecao Exceção de livro
+     */
     public int quantidadeReservados() throws LivroExcecao {
         if (livrosReservados.isEmpty()) {
             throw new LivroExcecao(LivroExcecao.SemLivrosReservados);
@@ -91,6 +139,11 @@ public class Relatorios {
         }
     }
 
+    /**
+     * Retorna lista dos livros mais emprestados
+     * @return livros populares
+     * @throws EmprestimoExcecao Exceção emprestimo
+     */
     public List<Livro> geraLivroPopular() throws EmprestimoExcecao {
         int maiorValor = 0;
         List<Livro> livroPopular = null;
@@ -111,6 +164,12 @@ public class Relatorios {
         }
     }
 
+    /**
+     * Gera o historico de emprestimos de uma pessoa especifica
+     * @param Leitor leitor
+     * @return historico do leitor
+     * @throws EmprestimoExcecao Exceção emprestimo
+     */
     public List<Emprestimo> geraPessoaEmprestimo(Leitor Leitor) throws EmprestimoExcecao {
         List<Emprestimo> emprestimoHistorico = null;
         Map<Long, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
