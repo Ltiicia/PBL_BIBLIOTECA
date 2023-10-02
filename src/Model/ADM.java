@@ -12,8 +12,20 @@ import DAO.Bibliotecario.BibliotecarioDAO;
 import Excecao.PessoaExcecao;
 
 import java.text.ParseException;
-
-public class ADM extends Bibliotecario{
+/**
+ * A classe Adm é uma subclasse da classe
+ * Bibliotecario. Ela herda os atributos e
+ * métodos da superclasse Bibliotecario. Contém um
+ * construtor para criar o objeto e os
+ * métodos getters e setters para obter e alterar
+ * os atributos privados. Contém metódos que
+ * são especificos para as funcionalidades de um administrador,
+ * como criar novos usuarios, operações para usuarios
+ * e gerenciar o acervo.
+ *
+ * @author Leticia Gonçalves e Helena Filemon
+ */
+public class ADM extends Bibliotecario{ //ADM cria os usuarios
 
     LeitorDAOImpl leitorDAO = new LeitorDAOImpl();
     BibliotecarioDAOImpl bibliotecarioDAO = new BibliotecarioDAOImpl();
@@ -26,6 +38,7 @@ public class ADM extends Bibliotecario{
      * @param id      O ID do administrador.
      * @param nome    O nome do administrador.
      * @param senha     A senha do administrador.
+     * @param idade     A idade do administrador
      * @param celular   O número de telefone do administrador.
      * @param endereco O endereço do administrador.
      */
@@ -74,10 +87,11 @@ public class ADM extends Bibliotecario{
     /**
      * Cria um novo administrador no sistema.
      *
-     * @param name    O nome do administrador.
-     * @param pin     A senha do administrador.
-     * @param phone   O número de telefone do administrador.
-     * @param address O endereço do administrador.
+     * @param nome    O nome do administrador.
+     * @param senha     A senha do administrador.
+     * @param idade      Idade do administrador
+     * @param celular   O número de telefone do administrador.
+     * @param endereco O endereço do administrador.
      * @return O administrador recém-criado.
      */
     public ADM createAdm(String nome, String senha, int idade, String celular, String endereco){
@@ -85,7 +99,7 @@ public class ADM extends Bibliotecario{
         ADM adm = new ADM(nome, id, senha, idade, celular, endereco);
 
         ADMDAO admDao = DAO.getAdmDAO();
-        admDao.create(ADM); //criou o book no banco de dados e armazenou no map tendo o seu id como chave
+        admDao.create(adm); //criou o book no banco de dados e armazenou no map tendo o seu id como chave
         return adm;
     }
 
@@ -94,12 +108,12 @@ public class ADM extends Bibliotecario{
     /**
      * Bloqueia um leitor no sistema.
      *
-     * @param reader O leitor a ser bloqueado.
-     * @throws UsersException se ocorrer um erro durante o bloqueio do leitor.
+     * @param leitor O leitor a ser bloqueado.
+     * @throws PessoaExcecao se ocorrer um erro durante o bloqueio do leitor.
      */
     public void blockLeitor(Leitor leitor) throws PessoaExcecao{
         if(leitor.getBlock()){
-            throw new PessoaExcecao(PessoaExcecao.AlreadyUserBlock);
+            throw new PessoaExcecao(PessoaExcecao.LeitorJaBloqueado);
         } else{
             leitor.bloqueiaLeitor(leitor);
         }}
@@ -107,12 +121,12 @@ public class ADM extends Bibliotecario{
     /**
      * Desbloqueia um leitor no sistema.
      *
-     * @param reader O leitor a ser desbloqueado.
-     * @throws UsersException se ocorrer um erro durante o desbloqueio do leitor.
+     * @param leitor O leitor a ser desbloqueado.
+     * @throws PessoaExcecao se ocorrer um erro durante o desbloqueio do leitor.
      */
     public void desbloqueiaLeitor(Leitor leitor) throws PessoaExcecao {
             if (!leitor.getBlock()) {
-                throw new PessoaExcecao(PessoaExcecao.AlreadyUserUnlock);
+                throw new PessoaExcecao(PessoaExcecao.LeitorJaDesbloqueado);
             } else {
                 leitor.desbloqueiaLeitor(leitor);
             }
@@ -129,7 +143,7 @@ public class ADM extends Bibliotecario{
     /**
      * Atualiza as informações de um livro no sistema.
      *
-     * @param book O livro a ser atualizado.
+     * @param livro O livro a ser atualizado.
      */
     public void updateBook(Livro livro){
         livros.update(livro);}

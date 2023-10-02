@@ -33,11 +33,11 @@ public class Bibliotecario extends Pessoa {
 
     public void registroEmprestimo(Leitor leitor, Livro livro) throws LivroExcecao, EmprestimoExcecao { // registrar emprestimo de leitor
         if(livro.getQuantidadeDisponivel() == 0){ //se tem livro disponivel
-            throw new LivroExcecao(LivroExcecao.NotAvailable);}
+            throw new LivroExcecao(LivroExcecao.Indisponivel);}
         else{
             if(livro.getReservaFila().isEmpty()){  //retorna true se a fila estiver vazia e false se tiver um elemento ao menos tiver uma pessoa
                 if(leitor.getBlock()){ //retorna true se estiver block
-                    throw new EmprestimoExcecao(EmprestimoExcecao.UserBlock);}
+                    throw new EmprestimoExcecao(EmprestimoExcecao.LeitorBloqueadoEmprestimo);}
                 else{
                     // Gera automaticamente o ID do empréstimo
                     long emprestimoId = emprestimoDAO.getProxId();
@@ -72,11 +72,11 @@ public class Bibliotecario extends Pessoa {
                     DAO.getRelatoriosDAO().save(relatorios); // salva o relatório
                     livro.getReservaFila().remove(); //removendo o primeiro elemento após concluir o emprestimo
                 }else{
-                    throw new LivroExcecao(LivroExcecao.NotAvailable);}}}}
+                    throw new LivroExcecao(LivroExcecao.Indisponivel);}}}}
 
 
-    public void registroLivro(String isbn, String titulo, String autor, String editora, int anoPublicacao, String categoria, String endereco, int quantidade) {
-        Livro newLivro = new Livro(isbn, titulo, autor, editora, anoPublicacao, categoria, endereco, quantidade);
+    public void registroLivro(String isbn, String titulo, String autor, String editora, int anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
+        Livro newLivro = new Livro(isbn, titulo, autor, editora, anoPublicacao, categoria,localizacao , quantidade);
 
         for (Livro livro : DAO.getLivroDAO().findMany()) {
             if (livro.getIsbn() == newLivro.getIsbn()) { // se o isbn dos livros forem iguais

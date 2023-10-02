@@ -50,7 +50,7 @@ public class LeitorDAOImpl implements LeitorDAO {
         return leitorMap.get(id);
     }
     @Override
-    public Map<Long, Leitor> getReaderMap() {
+    public Map<Long, Leitor> getLeitorMap() {
         return leitorMap;
     }
 

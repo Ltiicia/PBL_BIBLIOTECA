@@ -8,7 +8,7 @@ import Excecao.EmprestimoExcecao;
 import Excecao.LivroExcecao;
 
 public class Leitor extends Pessoa{  //leitor
-    public Boolean block;
+    public boolean block;
 
     public LocalDate prazo;
 
@@ -33,9 +33,9 @@ public class Leitor extends Pessoa{  //leitor
         leitor.block = false;
     }
 
-    public void reservaLivro(Leitor leitor, Livro livro){
+    public void reservaLivro(Leitor leitor, Livro livro) throws LivroExcecao{
         if(livro.getQuantidadeDisponivel() > 0){
-            throw new LivroExcecao(LivroExcecao.Available); //logo, vc pode ir fazer o emprestimo com o bibliotecario
+            throw new LivroExcecao(LivroExcecao.Disponivel); //logo, vc pode ir fazer o emprestimo com o bibliotecario
         }
         else{
             livro.addReservaFila(leitor); }
@@ -51,13 +51,13 @@ public class Leitor extends Pessoa{  //leitor
 
     public void renova_emprestimo(Leitor leitor, Emprestimo emprestimo, Livro livro) throws EmprestimoExcecao {
         if (!emprestimo.getAtivo()) { //se for falso
-              throw new EmprestimoExcecao(EmprestimoExcecao.FinalizedEmprestimo);}
+              throw new EmprestimoExcecao(EmprestimoExcecao.EmprestimoFinalizado);}
         else if (livro.getReservaFila().isEmpty()) { //se contém elementos na fila, logo contém pessoas
-                throw new EmprestimoExcecao(EmprestimoExcecao.ContainsPeople);}
+                throw new EmprestimoExcecao(EmprestimoExcecao.FilaEmprestimo);}
         else if (leitor.getBlock()) {
-                     throw new EmprestimoExcecao(EmprestimoExcecao.UserBlock);}
+                     throw new EmprestimoExcecao(EmprestimoExcecao.LeitorBloqueadoEmprestimo);}
         else if (emprestimo.getRenovacaoQuantidade() == 3) {
-                        throw new EmprestimoExcecao(EmprestimoExcecao.RenewalExceeded);
+                        throw new EmprestimoExcecao(EmprestimoExcecao.LimiteDeRenovacoes);
                     } else {
                         emprestimo.setRenovacaoQuantidade(1); //soma uma renovação
                         emprestimo.setDataDevolucao(datafinal(emprestimo.getDataDevolucao())); //pega a data final e soma + 10 dias, e fica sendo a nova data devolução

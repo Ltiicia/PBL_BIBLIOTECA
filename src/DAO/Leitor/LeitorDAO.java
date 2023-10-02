@@ -6,6 +6,6 @@ import Model.Leitor;
 import java.util.Map;
 
 public interface LeitorDAO extends CRUD<Leitor> {
-    public Map<Long, Leitor> getReaderMap();
+    public Map<Long, Leitor> getLeitorMap();
     public long getProxId();
 }
