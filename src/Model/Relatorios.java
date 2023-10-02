@@ -35,7 +35,7 @@ public class Relatorios {
 
     public int quantidadeLivrosEmprestados() throws LivroExcecao {
         if (livrosEmprestados.isEmpty()) {
-            throw new LivroExcecao(LivroExcecao.NoBorrowedBooks);
+            throw new LivroExcecao(LivroExcecao.SemLivrosEmprestados);
         } else {
             return livrosEmprestados.size();
         }
@@ -44,7 +44,7 @@ public class Relatorios {
 
     public List<Livro> geraLivrosEmprestados() throws LivroExcecao {
         if (livrosEmprestados.isEmpty()) {
-            throw new LivroExcecao(LivroExcecao.NoBorrowedBooks);
+            throw new LivroExcecao(LivroExcecao.SemLivrosEmprestados);
         } else {
             return livrosEmprestados;
         }
@@ -54,19 +54,19 @@ public class Relatorios {
         Map<Long, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
         for (Emprestimo emprestimo : emprestimoMap.values()) {
             LocalDate now = LocalDate.now();
-            if (now.isAfter(Emprestimo.getDataDevolucao())) {
+            if (now.isAfter(emprestimo.getDataDevolucao())) {
                 livrosAtrasados.add(emprestimo.getLivro());
             }
         }
         if (livrosAtrasados.isEmpty()) {
-            throw new LivroExcecao(LivroExcecao.NoLateBooks);
+            throw new LivroExcecao(LivroExcecao.SemLivrosAtrasados);
         } else {
             return livrosAtrasados;
         }
     }
     public int quantidadeLivrosAtrasados() throws LivroExcecao {
         if (livrosAtrasados.isEmpty()) {
-            throw new LivroExcecao(LivroExcecao.NoLateBooks);
+            throw new LivroExcecao(LivroExcecao.SemLivrosAtrasados);
         } else {
             return livrosAtrasados.size();
         }
@@ -85,7 +85,7 @@ public class Relatorios {
 
     public int quantidadeReservados() throws LivroExcecao {
         if (livrosReservados.isEmpty()) {
-            throw new LivroExcecao(LivroExcecao.NoReservedBooks);
+            throw new LivroExcecao(LivroExcecao.SemLivrosReservados);
         } else {
             return livrosReservados.size();
         }
@@ -105,7 +105,7 @@ public class Relatorios {
             }
         }
         if (livroPopular == null) {
-            throw new EmprestimoExcecao(EmprestimoExcecao.NoLoan);
+            throw new EmprestimoExcecao(EmprestimoExcecao.SemEmprestimo);
         } else {
             return livroPopular;
         }
@@ -121,7 +121,7 @@ public class Relatorios {
             }
         }
         if (emprestimoHistorico == null) {
-            throw new EmprestimoExcecao(EmprestimoExcecao.NoUserLoan);
+            throw new EmprestimoExcecao(EmprestimoExcecao.UsuarioSemEmprestimo);
         } else {
             return emprestimoHistorico;
         }}

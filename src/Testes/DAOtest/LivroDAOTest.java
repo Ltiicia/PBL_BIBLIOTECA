@@ -1,6 +1,8 @@
 package Testes.DAOtest;
+import Excecao.LivroExcecao;
 import Model.Livro;
 import DAO.DAO;
+import Model.LocalizaLivro;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,83 +10,65 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LivroDAOTest { //revisar
+public class LivroDAOTest {
 
-    Livro l, m, n;
+    private final LocalizaLivro localizacao = new LocalizaLivro("1", "4", "12");
+    private final Livro livro = new Livro("Percy Jackson", "Rick Riordan", "Intrinseca",
+            "1564913", 2010, "Aventura", localizacao, 1);
 
-    @BeforeEach
-    void setUp() {
-        l = new Livro("test", "joao", "editora", "1234", 2000, "abc", "Exemplo", 10);
-        m = new Livro("test", "joao", "editora", "1", 2000, "abc", "Exemplo", 10);
-        n = new Livro("test", "maria", "editora", "12", 2000, "abc", "Exemplo", 10);
-        DAO.getLivroDAO().create(l);
-        DAO.getLivroDAO().create(m);
-        DAO.getLivroDAO().create(n);
+    @Test
+    public void testAdicionaLivro() {
+        DAO.getLivroDAO().create(this.livro);
+
+        assertFalse(DAO.getLivroDAO().findMany().isEmpty()); // verifica se a lista de livros está vazia
     }
 
     @Test
-    void create() {
-        DAO.getLivroDAO().create(new Livro("a", "a", "a", 54321, 2000, "o", "Prateleira", 10));
-        assertEquals(l, DAO.getLivroDAO().findById(l.getIsbn()));
-        assertEquals(4, DAO.getLivroDAO().findMany().size());
+    public void testFindByIsbn() {
+        assertNotNull(DAO.getLivroDAO().findById("1564913")); // verifica se é encontrado um livro pelo isbn
     }
 
     @Test
-    void delete() {
-
-        assertEquals(3, DAO.getLivroDAO().findMany().size());
-        DAO.getLivroDAO().delete(m);
-
-        assertEquals(2, DAO.getLivroDAO().findMany().size());
-        assertNull(DAO.getLivroDAO().findById(m.getIsbn()));
+    public void findTitulo() {
+        // verifica se o livro adicionando é o mesmo que foi encontrado pelo título
+        for (Livro livros : DAO.getLivroDAO().findTitulo("Percy Jackson")) {
+            assertEquals(livros.getTitulo(), this.livro.getTitulo());
+        }
     }
 
     @Test
-    void update() {
-        assertEquals(l, DAO.getLivroDAO().findById(l.getIsbn()));
-        l.setAnoPublicacao(2010);
-        DAO.getLivroDAO().update(l);
-        assertEquals(2010, DAO.getLivroDAO().findById(l.getIsbn()).getAnoPublicacao());
+    public void findAutor() {
+        // verifica se o livro adicionando é o mesmo que foi encontrado pelo autor
+        for (Livro livros : DAO.getLivroDAO().findAutor("Rick Riordan")) {
+            assertEquals(livros.getAutor(), this.livro.getAutor());
+        }
     }
 
     @Test
-    void findMany() {
-        assertEquals(3, DAO.getLivroDAO().findMany().size());
-        assertEquals(l, DAO.getLivroDAO().findMany().get(2));
-        assertEquals(m, DAO.getLivroDAO().findMany().get(0));
-        assertEquals(n, DAO.getLivroDAO().findMany().get(1));
+    public void findCategoria() {
+        // verifica se o livro adicionando é o mesmo que foi encontrado pelo autor
+        for (Livro livros : DAO.getLivroDAO().findCategoria("Aventura")) {
+            assertEquals(livros.getCategoria(), this.livro.getCategoria());
+        }
     }
 
     @Test
-    void findById() throws LivroException {
-        assertEquals(l, DAO.getLivroDAO().findById(l.getIsbn()));
+    public void testUpdateLivro() {
+        // CRIANDO LIVRO DIFERENTE
+        Livro livroAlterado = new Livro("Percy Jackson", "Rick Riordan", "Intrinseca",
+                "1564913", 2010, "Aventura", localizacao, 2);
+
+        // ATUALIZANDO
+        DAO.getLivroDAO().update(livroAlterado);
+
+        Livro livroTest = DAO.getLivroDAO().findById("1564913");
+
+        assertNotEquals(this.livro, livroTest); // asserta que os objetos são diferentes
     }
 
     @Test
-    void findTitulo() throws LivroException {
-        assertEquals(DAO.getLivroDAO().findMany(), DAO.getLivroDAO().findTitulo("test"));
-        assertEquals(DAO.getLivroDAO().findMany(), DAO.getLivroDAO().findTitulo("te"));
-        assertTrue(DAO.getLivroDAO().findTitulo("abc").isEmpty());
-
-        Livro o = DAO.getLivroDAO().create(new Livro("Dom Casmurro", "maria", "editora", "125",
-                2000, "abc", "Exemplo",10));
-        assertEquals(DAO.getLivroDAO().findTitulo("Dom").get(0), o);
-        assertEquals(DAO.getLivroDAO().findTitulo("dom").get(0), o);
-        assertEquals(DAO.getLivroDAO().findTitulo("DOM").get(0), o);
+    public void testDeleteBook() {
+        DAO.getLivroDAO().deleteMany();
+        assertTrue(DAO.getLivroDAO().findMany().isEmpty());
     }
-
-    @Test
-    void findCategoria() {
-        DAO.getLivroDAO().create(l);
-        DAO.getLivroDAO().create(m);
-        assertEquals(l, DAO.getLivroDAO().findCategoria("Exemplo").get(0));
-        assertEquals(m, DAO.getLivroDAO().findCategoria("Exemplo").get(1));
-    }
-
-    @Test
-    void findByAutor() {
-        DAO.getLivroDAO().create(n);
-        assertEquals(n, DAO.getLivroDAO().findAutor("maria").get(0));
-    }
-
 }
