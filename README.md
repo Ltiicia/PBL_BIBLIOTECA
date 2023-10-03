@@ -1,4 +1,4 @@
-# Library Project 📚
+# Projeto de Gerenciamento de Biblioteca 📚
 Alunas: Letícia Gonçalves e Helena Filemon | Classe: Algoritmos 2
 
 ## Objetivo 📝
