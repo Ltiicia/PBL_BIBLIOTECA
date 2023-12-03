@@ -8,6 +8,7 @@ import Excecao.LivroExcecao;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 /**
  * A classe Bibliotecario é uma subclasse da classe Pessoa,
@@ -124,11 +125,11 @@ public class Bibliotecario extends Pessoa {
         Livro newLivro = new Livro(isbn, titulo, autor, editora, anoPublicacao, categoria,localizacao , quantidade);
 
         for (Livro livro : DAO.getLivroDAO().findMany()) {
-            if (livro.getIsbn() == newLivro.getIsbn()) { // verifica isbn dos livros se iguais
+            if (Objects.equals(livro.getIsbn(), newLivro.getIsbn())) { // verifica isbn dos livros se iguais
                 // se já existe esse livro cadastrado só soma a quantidade existente do livro
                 livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel() + newLivro.getQuantidadeDisponivel());
                 DAO.getLivroDAO().update(livro); // atualiza os dados no DAO
-                return;
+                return ;
             }
         }
         DAO.getLivroDAO().create(newLivro); // cria o livro e armazena no HashMap com o isbn como chave

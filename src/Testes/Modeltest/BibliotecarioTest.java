@@ -31,8 +31,9 @@ public class BibliotecarioTest {
         bibliotecario.registroLivro("Percy Jackson", "Rick Riordan", "Intrinseca",
                 "1564913", 2010, "Aventura", localizacao, 4);
 
-        assertNotNull(DAO.getLivroDAO().findById("1564913")); // verifica se o pesquisar por id retorna o livro cadastrado
+        assertNotNull(DAO.getLivroDAO().findByIsbn("1564913")); // verifica se o pesquisar por id retorna o livro cadastrado
     }
+
 
     @Test
     public void testRegistroLivroDuplo() {
@@ -43,7 +44,7 @@ public class BibliotecarioTest {
         bibliotecario.registroLivro("Percy Jackson", "Rick Riordan", "Intrinseca",
                 "1564913", 2010, "Aventura", localizacao, 4);
 
-        assertSame(5, DAO.getLivroDAO().findById("1564913").getQuantidadeDisponivel());
+        assertSame(5, DAO.getLivroDAO().findByIsbn("1564913").getQuantidadeDisponivel());
     }
 
     @Test

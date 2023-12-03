@@ -2,6 +2,7 @@ package DAO.Livro;
 
 import Arquivo.Arquivos;
 import Excecao.LivroExcecao;
+import Model.Bibliotecario;
 import Model.Livro;
 
 import java.io.*;
@@ -19,8 +20,11 @@ public class LivroDAOArq implements LivroDAO {
         arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
     }
 
-    public File getArquivo(){
-        return arquivo;
+    private Map<String, Livro> livrosMap = new HashMap<>();
+    //HashMap que guarda todos livros cadastrados (id:livro)
+
+    public Map<String, Livro> getLivrosMap() {
+        return livrosMap;
     }
 
 
@@ -29,7 +33,6 @@ public class LivroDAOArq implements LivroDAO {
     //Métodos CRUD
     @Override
     public Livro create(Livro livro){ //criando um livro e colocando no map//o id do livro vai ser o proprio isbn
-        Map<String, Livro> livrosMap = findManyMap();
         livrosMap.put(livro.getIsbn(), livro);
         Arquivos.sobreescreverArquivo(arquivo, livrosMap);
         return livro;
@@ -41,31 +44,31 @@ public class LivroDAOArq implements LivroDAO {
 
     @Override
     public List<Livro> findMany() { //retorna lista de livros
-        Collection<Livro> values = findManyMap().values();
-        return new LinkedList<Livro>(values);
-    }
+        return new ArrayList<>(livrosMap.values());}
 
     @Override
     public Livro findById(long id) {
         return null;
     }
 
-    public Livro findById(String isbn){
-        return findManyMap().get(isbn);
+    @Override
+    public Livro findByIsbn(String isbn){
+
+        return livrosMap.get(isbn);
     }
 
-    public Livro findByIsbn (String isbn) throws LivroExcecao {
+    /*public Livro findByISBN(String isbn) throws LivroExcecao {
         //retorna um livro pelo isbn
-        Livro l = findById(isbn);
+        Livro l = findByIsbn(isbn);
         if (l != null)
             return l;
         throw new LivroExcecao(LivroExcecao.ErroIsbn);
-    }
+    }*/
 
 
     @Override
     public Livro update (Livro obj){
-        Map<String, Livro> livrosMap = findManyMap();
+        livrosMap = findManyMap();
 
         livrosMap.remove(obj.getIsbn());
         livrosMap.put(obj.getIsbn(), obj);
@@ -83,7 +86,8 @@ public class LivroDAOArq implements LivroDAO {
     }
 
     public void deleteMany () {
-        Arquivos.apagarConteudoArquivo(arquivo);
+        livrosMap.clear();
+        Arquivos.sobreescreverArquivo(arquivo, livrosMap);
     }
 
     public List<Livro> findTitulo (String titulo){

@@ -9,7 +9,7 @@ public interface LivroDAO extends CRUD<Livro>{
     //Contem os Metodos de CRUD alem dos próprios
     //pesquisar livro por: titulo, autor, isbn e categoria.
     // Obs: pesquisar por Id é o mesmo que ISBN
-    public Livro findById(String id);
+    public Livro findByIsbn(String id);
     public List<Livro> findAutor(String autor);
     public List<Livro> findCategoria(String categoria);
     public List<Livro> findTitulo(String titulo);
