@@ -2,20 +2,20 @@ package DAO;
 
 
 import DAO.ADM.ADMDAO;
-import DAO.ADM.ADMDAOImpl;
+import DAO.ADM.ADMDAOArq;
 import DAO.Bibliotecario.BibliotecarioDAO;
-import DAO.Bibliotecario.BibliotecarioDAOImpl;
+import DAO.Bibliotecario.BibliotecarioDAOArq;
+import DAO.Emprestimo.EmprestimoDAOArq;
 import DAO.Leitor.LeitorDAO;
-import DAO.Leitor.LeitorDAOImpl;
+import DAO.Leitor.LeitorDAOArq;
 import DAO.Livro.LivroDAO;
-import DAO.Livro.LivroDAOImpl;
+import DAO.Livro.LivroDAOArq;
 
 import DAO.Emprestimo.EmprestimoDAO;
-import DAO.Emprestimo.EmprestimoDAOImpl;
 
 
 import DAO.Relatorios.RelatoriosDAO;
-import DAO.Relatorios.RelatoriosDAOImpl;
+import DAO.Relatorios.RelatoriosDAOArq;
 
 /*A classe DAO é usada para acessar os objetos DAO nas classes específicas.
 Para facilitar o acesso e tornar o código mais fácil de manter.
@@ -34,42 +34,42 @@ public class DAO {
 
     public static LivroDAO getLivroDAO() {
         if (livroDAO == null) {
-            livroDAO = new LivroDAOImpl();
+            livroDAO = new LivroDAOArq();
         }
         return livroDAO;
     }
 
     public static RelatoriosDAO getRelatoriosDAO() {
         if (relatoriosDAO == null) {
-            relatoriosDAO = new RelatoriosDAOImpl();
+            relatoriosDAO = new RelatoriosDAOArq();
         }
         return relatoriosDAO;
     }
 
     public static EmprestimoDAO getEmprestimoDAO() {
         if (emprestimoDAO == null) {
-            emprestimoDAO = new EmprestimoDAOImpl();
+            emprestimoDAO = new EmprestimoDAOArq();
         }
         return emprestimoDAO;
     }
 
     public static BibliotecarioDAO getBibliotecarioDAO() {
         if (bibliotecarioDAO == null) {
-            bibliotecarioDAO = new BibliotecarioDAOImpl();
+            bibliotecarioDAO = new BibliotecarioDAOArq();
         }
         return bibliotecarioDAO;
     }
 
     public static ADMDAO getAdmDAO(){
         if(admDAO == null){
-            admDAO = new ADMDAOImpl();
+            admDAO = new ADMDAOArq();
         }
         return admDAO;
     }
 
     public static LeitorDAO getLeitorDAO(){
         if(leitorDAO == null){
-            leitorDAO = new LeitorDAOImpl();
+            leitorDAO = new LeitorDAOArq();
         }
         return leitorDAO;
     }

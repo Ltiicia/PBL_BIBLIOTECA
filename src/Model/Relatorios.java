@@ -1,11 +1,12 @@
 package Model;
 
-import DAO.Emprestimo.EmprestimoDAOImpl;
-import DAO.Livro.LivroDAO;
-import DAO.Livro.LivroDAOImpl;
+import Arquivo.Arquivos;
+import DAO.Emprestimo.EmprestimoDAOArq;
+import DAO.Livro.LivroDAOArq;
 import Excecao.EmprestimoExcecao;
 import Excecao.LivroExcecao;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,10 @@ import java.util.Map;
  * @author Letícia Gonçalves e Helena Filemon
  */
 public class Relatorios {
-    LivroDAOImpl livros = new LivroDAOImpl();
-    EmprestimoDAOImpl emprestimos = new EmprestimoDAOImpl();
+
+    File arquivo;
+    LivroDAOArq livros = new LivroDAOArq();
+    EmprestimoDAOArq emprestimos = new EmprestimoDAOArq();
     private List<Livro> livrosEmprestados; //armazena livros que estão emprestados
     private List<Livro> livrosAtrasados; //armazena livros que estão atrasados
     private List<Livro> livrosReservados; //armazena livros que já estão reservados
@@ -117,13 +120,17 @@ public class Relatorios {
      * @return lista de reservados
      */
     public List<Livro> geraReservos() {
-        Map<String, Livro> livroMap = livros.getLivroMap();
+        Map<String, Livro> livroMap = findManyMap();
         for (Livro livro : livroMap.values()) {
             if (!livro.getReservaFila().isEmpty()) {
                 livrosReservados.add(livro);
             }
         }
         return livrosReservados;
+    }
+
+    private Map<String, Livro> findManyMap() {
+        return Arquivos.consultarArquivoMap(arquivo);
     }
 
     /**
@@ -147,7 +154,7 @@ public class Relatorios {
     public List<Livro> geraLivroPopular() throws EmprestimoExcecao {
         int maiorValor = 0;
         List<Livro> livroPopular = null;
-        Map<String, Livro> livroMap = livros.getLivroMap();
+        Map<String, Livro> livroMap = livros.findManyMap();
         for (Livro livro : livroMap.values()) {
             int valor = livro.getQuantidadeEmprestimo();
             if (valor == 0) {

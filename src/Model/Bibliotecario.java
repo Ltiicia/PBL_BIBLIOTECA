@@ -1,17 +1,13 @@
 package Model;
 
 import DAO.Emprestimo.EmprestimoDAO;
-import DAO.Emprestimo.EmprestimoDAOImpl;
-import DAO.Livro.LivroDAO;
+import DAO.Emprestimo.EmprestimoDAOArq;
 import DAO.DAO;
 import Excecao.EmprestimoExcecao;
 import Excecao.LivroExcecao;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * A classe Bibliotecario é uma subclasse da classe Pessoa,
@@ -28,7 +24,7 @@ public class Bibliotecario extends Pessoa {
 
     Relatorios relatorios = DAO.getRelatoriosDAO().getRelatorios();
 
-    EmprestimoDAOImpl emprestimoDAO = new EmprestimoDAOImpl();
+    EmprestimoDAOArq emprestimoDAO = new EmprestimoDAOArq();
 
     /**
      *

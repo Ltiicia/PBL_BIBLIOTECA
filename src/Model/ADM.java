@@ -1,17 +1,16 @@
 package Model;
 
 import DAO.ADM.ADMDAO;
-import DAO.Bibliotecario.BibliotecarioDAOImpl;
+import DAO.ADM.ADMDAOArq;
+import DAO.Bibliotecario.BibliotecarioDAOArq;
 import DAO.DAO;
 import DAO.Leitor.LeitorDAO;
-import DAO.Leitor.LeitorDAOImpl;
-import DAO.Livro.LivroDAOImpl;
-import DAO.ADM.ADMDAOImpl;
+import DAO.Leitor.LeitorDAOArq;
+import DAO.Livro.LivroDAOArq;
 
 import DAO.Bibliotecario.BibliotecarioDAO;
 import Excecao.PessoaExcecao;
 
-import java.text.ParseException;
 /**
  * A classe Adm é uma subclasse da classe
  * Bibliotecario. Ela herda os atributos e
@@ -27,10 +26,10 @@ import java.text.ParseException;
  */
 public class ADM extends Bibliotecario{ //ADM cria os usuarios
 
-    LeitorDAOImpl leitorDAO = new LeitorDAOImpl();
-    BibliotecarioDAOImpl bibliotecarioDAO = new BibliotecarioDAOImpl();
-    ADMDAOImpl admDAO = new ADMDAOImpl();
-    LivroDAOImpl livros = new LivroDAOImpl();
+    LeitorDAOArq leitorDAO = new LeitorDAOArq();
+    BibliotecarioDAOArq bibliotecarioDAO = new BibliotecarioDAOArq();
+    ADMDAOArq admDAO = new ADMDAOArq();
+    LivroDAOArq livros = new LivroDAOArq();
 
     /**
      * Construtor da classe Adm para criar um novo administrador.

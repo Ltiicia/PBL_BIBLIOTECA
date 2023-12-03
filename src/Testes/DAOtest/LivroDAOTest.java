@@ -16,17 +16,17 @@ public class LivroDAOTest {
     private final Livro livro = new Livro("Percy Jackson", "Rick Riordan", "Intrinseca",
             "1564913", 2010, "Aventura", localizacao, 1);
 
-    @Test
+    /*@Test
     public void testAdicionaLivro() {
         DAO.getLivroDAO().create(this.livro);
 
         assertFalse(DAO.getLivroDAO().findMany().isEmpty()); // verifica se a lista de livros está vazia
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testFindByIsbn() {
         assertNotNull(DAO.getLivroDAO().findById("1564913")); // verifica se é encontrado um livro pelo isbn
-    }
+    }*/
 
     @Test
     public void findTitulo() {

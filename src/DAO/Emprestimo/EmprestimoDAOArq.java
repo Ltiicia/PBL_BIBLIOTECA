@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EmprestimoDAOArq {
+public class EmprestimoDAOArq implements EmprestimoDAO{
 
     File arquivo;
     private static final String NOMEARQUIVO= "Emprestimo";
@@ -38,7 +38,7 @@ public class EmprestimoDAOArq {
     public Emprestimo create(Emprestimo emprestimo){
         long id = emprestimo.getIdEmprestimo();
         emprestimoMap.put(id, emprestimo);
-        Arquivo.sobreescreverArquivo(arquivo,emprestimoMap);
+        Arquivos.sobreescreverArquivo(arquivo,emprestimoMap);
         return emprestimo;
     }//guarda os emprestimos no Map e o id como chave
 
@@ -63,7 +63,7 @@ public class EmprestimoDAOArq {
     @Override
     public Emprestimo update(Emprestimo emprestimo){
         emprestimoMap.put(emprestimo.getIdEmprestimo(), emprestimo);
-        Arquivo.sobreescreverArquivo(arquivo,emprestimoMap);
+        Arquivos.sobreescreverArquivo(arquivo,emprestimoMap);
         return null;
     }//atualiza o emprestimo no hashmap
 
@@ -72,12 +72,12 @@ public class EmprestimoDAOArq {
     public void delete(Emprestimo emprestimo){
         long id = emprestimo.getIdEmprestimo();
         emprestimoMap.remove(id);
-        Arquivo.sobreescreverArquivo(arquivo,emprestimoMap);
+        Arquivos.sobreescreverArquivo(arquivo,emprestimoMap);
     }//deleta o emprestimo
 
 
     public void deleteMany(){
         emprestimoMap.clear();
-        Arquivo.apagarConteudoArquivo(arquivo);
+        Arquivos.apagarConteudoArquivo(arquivo);
     }//esvazia o HashMap emprestimoMap
 }

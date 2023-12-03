@@ -44,7 +44,7 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
     public Bibliotecario create(Bibliotecario bibliotecario) {
         bibliotecario.setId(getProxId());
         bibliotecarioMap.put(bibliotecario.getId(), bibliotecario);
-        Arquivo.sobreescreverArquivo(arquivo,bibliotecarioMap);
+        Arquivos.sobreescreverArquivo(arquivo,bibliotecarioMap);
         return bibliotecario;
     }
 
@@ -52,19 +52,19 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
     public void delete(Bibliotecario bibliotecario) {
         long id = bibliotecario.getId();
         bibliotecarioMap.remove(id);
-        Arquivo.sobreescreverArquivo(arquivo,bibliotecarioMap);
+        Arquivos.sobreescreverArquivo(arquivo,bibliotecarioMap);
     }
 
     @Override
     public void deleteMany(){
         bibliotecarioMap.clear();
-        Arquivo.apagarConteudoArquivo(arquivo);
+        Arquivos.apagarConteudoArquivo(arquivo);
     }
 
     @Override
     public Bibliotecario update(Bibliotecario bibliotecario){
         bibliotecarioMap.put(bibliotecario.getId(), bibliotecario);
-        Arquivo.sobreescreverArquivo(arquivo,bibliotecarioMap);
+        Arquivos.sobreescreverArquivo(arquivo,bibliotecarioMap);
         return bibliotecario;
     }
 

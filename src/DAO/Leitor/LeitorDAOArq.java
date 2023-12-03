@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeitorDAOArq {
+public class LeitorDAOArq implements LeitorDAO {
 
     File arquivo;
     private static final String NOMEARQUIVO= "Leitor";
@@ -38,20 +38,20 @@ public class LeitorDAOArq {
     public Leitor create(Leitor leitor) {
         leitor.setId(getProxId());
         leitorMap.put(leitor.getId(), leitor);
-        Arquivo.sobreescreverArquivo(arquivo,leitorMap);
+        Arquivos.sobreescreverArquivo(arquivo,leitorMap);
         return leitor;
     }
 
     @Override
     public void delete(Leitor leitor) {
         leitorMap.remove(leitor.getId());
-        Arquivo.sobreescreverArquivo(arquivo,leitorMap);
+        Arquivos.sobreescreverArquivo(arquivo,leitorMap);
     }
 
     @Override
     public Leitor update(Leitor leitor) {
         leitorMap.put(leitor.getId(), leitor);
-        Arquivo.sobreescreverArquivo(arquivo,leitorMap);
+        Arquivos.sobreescreverArquivo(arquivo,leitorMap);
         return leitor;
     }
 
