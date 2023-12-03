@@ -1,6 +1,8 @@
 package DAO.Livro;
 
+import Arquivo.Arquivos;
 import Model.Livro;
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 public class LivroDAOArq {
+
+    File arquivo;
+    private static final String NOMEARQUIVO= "Livros";
+
+    public LivroDAOArq(){
+        arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
+    }
+
     private final Map<String, Livro> livrosmap = new HashMap<>();
     //HashMap que guarda todos livros cadastrados (id:livro)
 
@@ -24,6 +34,7 @@ public class LivroDAOArq {
     public Livro create(Livro livro){ //criando um livro e colocando no map
         String id = livro.getIsbn(); //o id do livro vai ser o proprio isbn
         livrosmap.put(id, livro);
+        Arquivos.sobreescreverArquivo(arquivo, livrosmap);
         return livro;
     }
 
@@ -32,25 +43,32 @@ public class LivroDAOArq {
         return new ArrayList<>(livrosmap.values());}
 
     @Override
-    public Livro findById(long id) {
-        return null;}
+    public Livro findById(long id){
+        return null;
+    }
 
-    public Livro findById(String id) {
+    public Livro findById(String id){
         //retorna um livro pelo isbn
-        return livrosmap.get(id);}
+        return livrosmap.get(id);
+    }
 
     @Override
-    public Livro update(Livro livro) {
+    public Livro update(Livro livro){
         livrosmap.put(livro.getIsbn(), livro);
-        return null;}
+        Arquivos.sobreescreverArquivo(arquivo, livrosmap);
+        return null;
+    }
 
     @Override
-    public void delete(Livro obj) {
+    public void delete(Livro obj){
         String id = obj.getIsbn();
-        livrosmap.remove(id);}
+        livrosmap.remove(id);
+        Arquivo.sobreescreverArquivo(arquivo,livrosMap);
+    }
 
     public void deleteMany(){
         livrosmap.clear();
+        Arquivos.apagarConteudoArquivo(arquivo);
     }
 
     public List<Livro> findTitulo(String titulo) {
@@ -61,6 +79,7 @@ public class LivroDAOArq {
         return livrosTitulo;
     }//retorna lista de livros por titulo
 
+
     public List<Livro> findAutor(String autor) {
         List<Livro> livrosAutor = new ArrayList<>();
         for (Livro livro : livrosmap.values()) {
@@ -70,6 +89,7 @@ public class LivroDAOArq {
         }
         return livrosAutor;
     }//retorna lista livros por autor
+
 
     public List<Livro> findCategoria(String categoria) {
         List<Livro> livrosCategoria = new ArrayList<>();

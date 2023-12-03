@@ -1,6 +1,8 @@
 package DAO.Emprestimo;
 
+import Arquivo.Arquivos;
 import Model.Emprestimo;
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +10,17 @@ import java.util.List;
 import java.util.Map;
 
 public class EmprestimoDAOArq {
+
+    File arquivo;
+    private static final String NOMEARQUIVO= "Emprestimo";
+
+    public EmprestimoDAOArq(){
+        arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
+    }
+
     private final Map<Long, Emprestimo> emprestimoMap = new HashMap<>();
     //HashMap que guarda todos emprestimos feitos (id:emprestimo)
+
     public Map<Long, Emprestimo> getEmprestimoMap() {
         //retorna todos os emprestimos em formato Map
         return emprestimoMap;
@@ -17,7 +28,6 @@ public class EmprestimoDAOArq {
     private long proxId = 0;
 
     public long getProxId() {
-
         return proxId++;// retorna Id para o objeto
         // define o próximo Id incrementando do anterior
     }
@@ -28,6 +38,7 @@ public class EmprestimoDAOArq {
     public Emprestimo create(Emprestimo emprestimo){
         long id = emprestimo.getIdEmprestimo();
         emprestimoMap.put(id, emprestimo);
+        Arquivo.sobreescreverArquivo(arquivo,emprestimoMap);
         return emprestimo;
     }//guarda os emprestimos no Map e o id como chave
 
@@ -36,8 +47,6 @@ public class EmprestimoDAOArq {
     public List<Emprestimo> findMany(){
         return new ArrayList<>(emprestimoMap.values());
     }//retorna lista de emprestimos
-
-
 
 
     @Override
@@ -54,6 +63,7 @@ public class EmprestimoDAOArq {
     @Override
     public Emprestimo update(Emprestimo emprestimo){
         emprestimoMap.put(emprestimo.getIdEmprestimo(), emprestimo);
+        Arquivo.sobreescreverArquivo(arquivo,emprestimoMap);
         return null;
     }//atualiza o emprestimo no hashmap
 
@@ -62,11 +72,12 @@ public class EmprestimoDAOArq {
     public void delete(Emprestimo emprestimo){
         long id = emprestimo.getIdEmprestimo();
         emprestimoMap.remove(id);
+        Arquivo.sobreescreverArquivo(arquivo,emprestimoMap);
     }//deleta o emprestimo
 
 
     public void deleteMany(){
         emprestimoMap.clear();
+        Arquivo.apagarConteudoArquivo(arquivo);
     }//esvazia o HashMap emprestimoMap
-}
 }

@@ -1,6 +1,8 @@
 package DAO.Bibliotecario;
 
+import Arquivo.Arquivos;
 import Model.Bibliotecario;
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 public class BibliotecarioDAOArq implements BibliotecarioDAO{
+
+    File arquivo;
+    private static final String NOMEARQUIVO= "Bibliotecario";
+
+    public BibliotecarioDAOArq(){
+        arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
+    }
+
     private final Map<Long, Bibliotecario> bibliotecarioMap = new HashMap<>();
     //HashMap que guarda todos bibliotecarios cadastrados (id:bibliotecario)
     private long proxId = 0;
@@ -34,6 +44,7 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
     public Bibliotecario create(Bibliotecario bibliotecario) {
         bibliotecario.setId(getProxId());
         bibliotecarioMap.put(bibliotecario.getId(), bibliotecario);
+        Arquivo.sobreescreverArquivo(arquivo,bibliotecarioMap);
         return bibliotecario;
     }
 
@@ -41,28 +52,30 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
     public void delete(Bibliotecario bibliotecario) {
         long id = bibliotecario.getId();
         bibliotecarioMap.remove(id);
+        Arquivo.sobreescreverArquivo(arquivo,bibliotecarioMap);
     }
 
     @Override
-    public void deleteMany() {
+    public void deleteMany(){
         bibliotecarioMap.clear();
+        Arquivo.apagarConteudoArquivo(arquivo);
     }
 
     @Override
-    public Bibliotecario update(Bibliotecario bibliotecario) {
+    public Bibliotecario update(Bibliotecario bibliotecario){
         bibliotecarioMap.put(bibliotecario.getId(), bibliotecario);
+        Arquivo.sobreescreverArquivo(arquivo,bibliotecarioMap);
         return bibliotecario;
     }
 
     @Override
-    public List<Bibliotecario> findMany() {
+    public List<Bibliotecario> findMany(){
         return new ArrayList<>(bibliotecarioMap.values());
     }
 
     @Override
-    public Bibliotecario findById(long id) {
+    public Bibliotecario findById(long id){
         return bibliotecarioMap.get(id);
     }
 
-}
 }

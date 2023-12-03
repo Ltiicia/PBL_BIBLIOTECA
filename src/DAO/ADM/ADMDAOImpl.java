@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.HashMap;
 
 public class ADMDAOImpl implements ADMDAO{
+
     private final Map<Long, ADM> AdmMap = new HashMap<>();
     //HashMap que guarda todos ADMs cadastrados (id:ADM)
     private long proxId = 0;

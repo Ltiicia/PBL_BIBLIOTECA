@@ -1,8 +1,18 @@
 package DAO.Relatorios;
 
+import Arquivo.Arquivos;
 import Model.Relatorios;
+import java.io.*;
 
 public class RelatoriosDAOArq {
+
+    File arquivo;
+    private static final String NOMEARQUIVO= "Relatorios";
+
+    public RelatoriosDAOArq(){
+        arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
+    }
+
     private Relatorios relatorios;
 
     /**
@@ -24,6 +34,7 @@ public class RelatoriosDAOArq {
     @Override
     public Relatorios save(Relatorios relatorios) {
         this.relatorios = relatorios;
+        Arquivo.sobreescreverArquivo(arquivo,relatorios);
         return relatorios;
     }
 
@@ -31,9 +42,11 @@ public class RelatoriosDAOArq {
      * Método que deleta um relatorio antes criado
      * @param relatorios
      */
+
     @Override
     public void delete(Relatorios relatorios) {
         this.relatorios = new Relatorios();
+        Arquivos.apagarConteudoArquivo(arquivo);
     }
 
 }
