@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c53d9fcc-55eb-454a-bb09-1f3ba61f4e40" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/livro.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/ErrorTextController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/HomeLeitorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controllers/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/pbl_biblioteca/erroText-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/pbl_biblioteca/home-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/pbl_biblioteca/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PBL_BIBLIOTECA.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Arquivo/Arquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Arquivo/Arquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/ADM/ADMDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/ADM/ADMDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/ADM/ADMDAOArq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/ADM/ADMDAOArq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Bibliotecario/BibliotecarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Bibliotecario/BibliotecarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Bibliotecario/BibliotecarioDAOArq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Bibliotecario/BibliotecarioDAOArq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/CRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/CRUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Emprestimo/EmprestimoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Emprestimo/EmprestimoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Emprestimo/EmprestimoDAOArq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Emprestimo/EmprestimoDAOArq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Leitor/LeitorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Leitor/LeitorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Leitor/LeitorDAOArq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Leitor/LeitorDAOArq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Livro/LivroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Livro/LivroDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Livro/LivroDAOArq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Livro/LivroDAOArq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Relatorios/RelatoriosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Relatorios/RelatoriosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/Relatorios/RelatoriosDAOArq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/Relatorios/RelatoriosDAOArq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Excecao/EmprestimoExcecao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Excecao/EmprestimoExcecao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Excecao/LivroExcecao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Excecao/LivroExcecao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Excecao/PessoaExcecao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Excecao/PessoaExcecao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/ADM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/ADM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Bibliotecario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Bibliotecario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Emprestimo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Emprestimo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Leitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Leitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Livro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Livro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/LocalizaLivro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/LocalizaLivro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Pessoa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Relatorios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Relatorios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/DAOtest/EmprestimoDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Testes/DAOtest/EmprestimoDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/DAOtest/LivroDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Testes/DAOtest/LivroDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/Modeltest/ADMTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Testes/Modeltest/ADMTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/Modeltest/BibliotecarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Testes/Modeltest/BibliotecarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Testes/Modeltest/LeitorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Testes/Modeltest/LeitorTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2cP1zEW5QZHfP9XLQXyZyFwlsLE" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmprestimoDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/letig/Desktop/ExemplosPBL/Sara/Library&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\letig\Desktop\PBL NOVO\PBL_BIBLIOTECA\src\main\resources\org\example\pbl_biblioteca" />
+      <recent name="C:\Users\letig\Desktop\PBL NOVO\PBL_BIBLIOTECA\images" />
+      <recent name="C:\Users\letig\Desktop\PBL NOVO\PBL_BIBLIOTECA\src\main\java\org\example" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.HelloApplication" />
+      <module name="PBL_BIBLIOTECA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.Controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c53d9fcc-55eb-454a-bb09-1f3ba61f4e40" name="Changes" comment="" />
+      <created>1707998662261</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707998662261</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
