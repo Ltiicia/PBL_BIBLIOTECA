@@ -1,6 +1,6 @@
 package org.example.DAO.Relatorios;
 
-import org.example.Arquivo.Arquivos;
+import org.example.utils.Arquivos;
 import org.example.Model.Relatorios;
 
 import java.io.File;
@@ -16,8 +16,8 @@ public class RelatoriosDAOArq implements RelatoriosDAO {
         arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
     }
 
-    private final Map<String, Relatorios> relatoriosMap = new HashMap<>();
-    public Map<String, Relatorios> getRelatoriosMap(){
+    private final HashMap<String, Relatorios> relatoriosMap = new HashMap<>();
+    public HashMap<String, Relatorios> getRelatoriosMap(){
         return relatoriosMap;
     }
 
@@ -28,7 +28,7 @@ public class RelatoriosDAOArq implements RelatoriosDAO {
      * Método que retorna o relatorio que ja existe
      * @return relatorios
      */
-    public Relatorios getRelatorios(){
+    public Relatorios getRelatorios() throws Exception {
         if(relatorios == null){
             relatorios = new Relatorios();
         }
@@ -58,7 +58,7 @@ public class RelatoriosDAOArq implements RelatoriosDAO {
      */
 
     @Override
-    public void delete(Relatorios relatorios) {
+    public void delete(Relatorios relatorios) throws Exception {
         this.relatorios = new Relatorios();
         Arquivos.apagarConteudoArquivo(arquivo);
     }

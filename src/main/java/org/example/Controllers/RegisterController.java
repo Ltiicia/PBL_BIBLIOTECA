@@ -3,6 +3,7 @@ package org.example.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,16 +12,21 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.DAO.DAO;
 import org.example.Model.ADM;
 import org.example.Model.Bibliotecario;
 import org.example.Model.Leitor;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class RegisterController {
+public class RegisterController implements Initializable {
 
     @FXML
     private RadioButton admCheckButton;
@@ -36,7 +42,8 @@ public class RegisterController {
 
     @FXML
     private RadioButton leitorCheckButton;
-
+    @FXML
+    private ImageView image;
     @FXML
     private TextField nomeTextField;
 
@@ -55,6 +62,13 @@ public class RegisterController {
     @FXML
     private Button voltarButton;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        File livroFile = new File("images/livro.png");
+        Image livroImage = new Image(livroFile.toURI().toString());
+        image.setImage(livroImage);
+
+    }
 
     @FXML
     void registrarBttAction(ActionEvent event) throws Exception {
@@ -79,11 +93,9 @@ public class RegisterController {
             int telefone = Integer.parseInt(userTelefone);
         }
 
-
         switch (userType) {
             case "Leitor":
                 registerLeitor(userType, userNome, userCPF, userSenha, userTelefone, userEndereco);
-
                 break;
             case "Bibliotecario":
                 registerBiblio(userType, userNome, userCPF, userSenha, userTelefone, userEndereco);
@@ -95,9 +107,11 @@ public class RegisterController {
 
     }
 
-    private void registerLeitor(String userType, String userNome, String userCPF, String userSenha, String userTelefone, String userEndereco) throws IOException {
+
+    private void registerLeitor(String userType, String userNome, String userCPF, String userSenha, String userTelefone, String userEndereco) throws Exception {
         // Implemente a lógica para registrar um leitor aqui
-        Leitor leitor = new Leitor(userNome, userCPF, userSenha, userTelefone, userEndereco);
+
+        Leitor leitor = new Leitor(userType, userNome, userCPF, userSenha, userTelefone, userEndereco);
         DAO.getLeitorDAO().create(leitor);
 
         Stage stage = (Stage) enderecoTextField.getScene().getWindow();
@@ -112,9 +126,9 @@ public class RegisterController {
 
     }
 
-    private void registerBiblio(String userType, String userNome, String userCPF, String userSenha, String userTelefone, String userEndereco) throws IOException {
+    private void registerBiblio(String userType, String userNome, String userCPF, String userSenha, String userTelefone, String userEndereco) throws Exception {
         // Implemente a lógica para registrar um bibliotecário aqui
-        Bibliotecario bibliotecario = new Bibliotecario(userNome, userCPF, userSenha, userTelefone, userEndereco);
+        Bibliotecario bibliotecario = new Bibliotecario(userType, userNome, userCPF, userSenha, userTelefone, userEndereco);
         DAO.getBibliotecarioDAO().create(bibliotecario);
 
         Stage stage = (Stage) enderecoTextField.getScene().getWindow();
@@ -128,9 +142,9 @@ public class RegisterController {
         loginStage.show();
     }
 
-    private void registerAdmin(String userType, String userNome, String userCPF, String userSenha, String userTelefone, String userEndereco) throws IOException {
+    private void registerAdmin(String userType, String userNome, String userCPF, String userSenha, String userTelefone, String userEndereco) throws Exception {
         // Implemente a lógica para registrar um administrador aqui
-        ADM adm = new ADM(userNome, userCPF, userSenha, userTelefone, userEndereco);
+        ADM adm = new ADM(userType, userNome, userCPF, userSenha, userTelefone, userEndereco);
         DAO.getAdmDAO().create(adm);
 
         Stage stage = (Stage) enderecoTextField.getScene().getWindow();
@@ -149,11 +163,10 @@ public class RegisterController {
         try {
             Stage currentScreen = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentScreen.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/pbl_biblioteca/login-view.fxml"));
             Parent root = loader.load();
-            Stage loginStage = new Stage();
             Scene scene = new Scene(root);
-            loginStage.setResizable(false);
+            Stage loginStage = new Stage();
             loginStage.setScene(scene);
             loginStage.show();
 

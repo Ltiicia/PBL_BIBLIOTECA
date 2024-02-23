@@ -1,8 +1,10 @@
 package org.example.Model;
+import java.io.Reader;
 import java.time.LocalDate;
 
 import org.example.Excecao.EmprestimoExcecao;
 import org.example.Excecao.LivroExcecao;
+import org.example.Excecao.PessoaExcecao;
 
 /**
  * A classe Leitor é subclasse da classe Pessoa,
@@ -24,6 +26,8 @@ public class Leitor extends Pessoa{  //leitor
 
     public LocalDate prazo;
 
+    public LocalDate fimMulta;
+
     /**
      * Construtor da classe Leitor
      * @param nome          Nome do leitor
@@ -32,10 +36,13 @@ public class Leitor extends Pessoa{  //leitor
      * @param celular       Celular do leitor
      * @param endereco      Endereço do leitor
      */
-    public Leitor(String nome, String cpf, String senha, String celular, String endereco) {
-        super(nome, cpf, senha, celular, endereco);
+    public Leitor(String tipo, String nome, String cpf, String senha, String celular, String endereco) {
+        super(tipo, nome, cpf, senha, celular, endereco);
         this.prazo = null;
+        this.fimMulta =null;
     }
+
+
 
     /**
      * Estado de bloqueio do leitor
@@ -49,6 +56,12 @@ public class Leitor extends Pessoa{  //leitor
         }
     }
 
+    public LocalDate getfimMulta() {
+        return fimMulta;
+    }
+    public void setfimMulta(LocalDate fimDaMulta) {
+        this.fimMulta = fimMulta;
+    }
     /**
      * Bloqueia leitor com block como true
      * @param leitor leitor bloqueado
@@ -71,13 +84,15 @@ public class Leitor extends Pessoa{  //leitor
      * @param livro     livro
      * @throws LivroExcecao Exceções de livro
      */
-    public void reservaLivro(Leitor leitor, Livro livro) throws LivroExcecao{
-        if(livro.getQuantidadeDisponivel() > 0){
+    public void reservaLivro(Leitor leitor, Livro livro) throws LivroExcecao, PessoaExcecao { //verefica se tem livro disponivel
+        if(Livro.getQuantidadeDisponivel() > 0){
             throw new LivroExcecao(LivroExcecao.Disponivel); //logo, vc pode ir fazer o emprestimo com o bibliotecario
         }
         else{
-            livro.addReservaFila(leitor); }
-    }
+            if(leitor.block){
+                throw new PessoaExcecao(PessoaExcecao.LeitorJaBloqueado);
+            }else{
+                livro.addReservaFila(leitor); }}}
 
     /**
      * Remove da fila de reserva do livro.
@@ -133,4 +148,5 @@ public class Leitor extends Pessoa{  //leitor
         }
         return leitor.block;
     }
+
 }

@@ -40,8 +40,8 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
      * @param celular   O número de telefone do administrador.
      * @param endereco O endereço do administrador.
      */
-    public ADM(String nome, String cpf, String senha, String celular, String endereco) {
-        super(nome, cpf, senha, celular, endereco);
+    public ADM(String tipo, String nome, String cpf, String senha, String celular, String endereco) throws Exception {
+        super(tipo, nome, cpf, senha, celular, endereco);
     }
 
     //CRIAÇÃO DE PESSOAS(USUARIOS)
@@ -55,8 +55,8 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
      * @param endereco O endereço do leitor.
      * @return leitor
      */
-    public Leitor createLeitor(String nome, String cpf, String senha, String celular, String endereco){
-        Leitor leitor = new Leitor(nome, cpf, senha,  celular, endereco);
+    public Leitor createLeitor(String tipo, String nome, String cpf, String senha, String celular, String endereco) throws Exception {
+        Leitor leitor = new Leitor(tipo, nome, cpf, senha,  celular, endereco);
         LeitorDAO leitorDao = DAO.getLeitorDAO();
         leitorDao.create(leitor);
         return leitor;}
@@ -70,8 +70,8 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
      * @param endereco O endereço do bibliotecário.
      * @return O bibliotecário
      */
-    public Bibliotecario createBibliotecario(String nome, String cpf, String senha, String celular, String endereco){ //bibliotecario não tem id
-        Bibliotecario bibliotecario = new Bibliotecario(nome, cpf, senha, celular, endereco);
+    public Bibliotecario createBibliotecario(String tipo, String nome, String cpf, String senha, String celular, String endereco) throws Exception { //bibliotecario não tem id
+        Bibliotecario bibliotecario = new Bibliotecario(tipo, nome, cpf, senha, celular, endereco);
         BibliotecarioDAO bibliotecarioDao = DAO.getBibliotecarioDAO();
         bibliotecarioDao.create(bibliotecario);
         return bibliotecario;}
@@ -85,8 +85,8 @@ public class ADM extends Bibliotecario{ //ADM cria os usuarios
      * @param endereco O endereço do administrador.
      * @return O administrador recém-criado.
      */
-    public ADM createAdm(String nome, String cpf, String senha, String celular, String endereco){
-        ADM adm = new ADM(nome, cpf, senha, celular, endereco);
+    public ADM createAdm(String tipo, String nome, String cpf, String senha, String celular, String endereco) throws Exception {
+        ADM adm = new ADM(tipo, nome, cpf, senha, celular, endereco);
         ADMDAO admDao = DAO.getAdmDAO();
         admDao.create(adm);
         return adm;

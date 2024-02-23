@@ -1,6 +1,7 @@
 package org.example.DAO.ADM;
 
-import org.example.Arquivo.Arquivos;
+import org.example.Model.Bibliotecario;
+import org.example.utils.Arquivos;
 import org.example.Model.ADM;
 
 import java.io.File;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.example.utils.Arquivos.consultarArquivoMap;
 
 public class ADMDAOArq implements ADMDAO{
 
@@ -18,7 +21,7 @@ public class ADMDAOArq implements ADMDAO{
         arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
     }
 
-    private final Map<String, ADM> AdmMap = new HashMap<>();
+    private final HashMap<String, ADM> AdmMap = new HashMap<>();
 
     //HashMap que guarda todos ADMs cadastrados (id:ADM)
     //private long proxId = 0;
@@ -53,13 +56,18 @@ public class ADMDAOArq implements ADMDAO{
     }
 
     @Override
-    public boolean findByCPF(String cpf) {
-        // Verifique se a chave está no HashMap
-        if (AdmMap.containsKey(cpf)) {
+    public boolean findByCPFIsTrue(String cpf) {
+        if (this.AdmMap.containsKey(cpf)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+    }
+    public String achaCpf(String cpf){
+        ADM adm = this.AdmMap.get(cpf);
+        if(adm != null){
+            return adm.getCpf();
+        }
+        throw new IllegalArgumentException("Tecnico não detectado no banco de dados");
     }
 
     @Override
@@ -69,7 +77,11 @@ public class ADMDAOArq implements ADMDAO{
 
     @Override
     public ADM findById(String cpf) {
-        return AdmMap.get(cpf);
+        ADM adm = this.AdmMap.get(cpf);
+        if(adm != null){
+            return adm;
+        }
+        throw new IllegalArgumentException("Administrador não detectado no banco de dados");
     }
 
     public void deleteMany(){

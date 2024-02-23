@@ -1,6 +1,6 @@
 package org.example.DAO.Livro;
 
-import org.example.Arquivo.Arquivos;
+import org.example.utils.Arquivos;
 import org.example.Model.Livro;
 
 import java.util.ArrayList;
@@ -20,10 +20,10 @@ public class LivroDAOArq implements LivroDAO {
         arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
     }
 
-    private Map<String, Livro> livrosMap = new HashMap<>();
+    private HashMap<String, Livro> livrosMap = new HashMap<>();
     //HashMap que guarda todos livros cadastrados (id:livro)
 
-    public Map<String, Livro> getLivrosMap() {
+    public HashMap<String, Livro> getLivrosMap() {
         return livrosMap;
     }
 
@@ -38,7 +38,7 @@ public class LivroDAOArq implements LivroDAO {
         return livro;
     }
 
-    public Map<String, Livro> findManyMap() {
+    public HashMap<String, Livro> findManyMap() {
         return Arquivos.consultarArquivoMap(arquivo);
     }
 
@@ -52,9 +52,12 @@ public class LivroDAOArq implements LivroDAO {
     }
 
     @Override
-    public Livro findByIsbn(String isbn){
-
-        return livrosMap.get(isbn);
+    public boolean findByIsbn(String isbn){
+        if(livrosMap.get(isbn) != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /*public Livro findByISBN(String isbn) throws LivroExcecao {
@@ -79,7 +82,7 @@ public class LivroDAOArq implements LivroDAO {
     }
 
     @Override
-    public boolean findByCPF(String cpf) {
+    public boolean findByCPFIsTrue(String cpf) {
         return false;
     }
 
@@ -115,6 +118,11 @@ public class LivroDAOArq implements LivroDAO {
     public List<Livro> findCategoria (String categoria){
         return findBooksBy(l -> l.getCategoria().equals(categoria));
     }//retorna lista de livros por categoria
+
+    @Override
+    public Livro findIsbn(String isbn) {
+        return null;
+    }
 
     public Long QuantidadeLivros() {
         Map<String, Livro> livrosMap = findManyMap();

@@ -7,6 +7,8 @@ import org.example.Excecao.EmprestimoExcecao;
 import org.example.Excecao.LivroExcecao;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
@@ -36,8 +38,8 @@ public class Bibliotecario extends Pessoa {
      * @param celular   número do bibliotecario
      * @param endereco  endereco do bibliotecario
      */
-    public Bibliotecario(String nome, String cpf, String senha, String celular, String endereco) {
-        super(nome, cpf, senha, celular, endereco);
+    public Bibliotecario(String tipo, String nome, String cpf, String senha, String celular, String endereco) throws Exception {
+        super(tipo, nome, cpf, senha, celular, endereco);
     }
 
     /**
@@ -67,7 +69,7 @@ public class Bibliotecario extends Pessoa {
      * @throws LivroExcecao tratando os erros relacionados ao livro
      * @throws EmprestimoExcecao tratando os erros relacionados ao emprestimo
      */
-    public void registroEmprestimo(Leitor leitor, Livro livro) throws LivroExcecao, EmprestimoExcecao { // registrar emprestimo de leitor
+    public void registroEmprestimo(Leitor leitor, Livro livro) throws Exception { // registrar emprestimo de leitor
         if(livro.getQuantidadeDisponivel() == 0){ //se livro disponivel
             throw new LivroExcecao(LivroExcecao.Indisponivel);}
         else{
@@ -78,9 +80,11 @@ public class Bibliotecario extends Pessoa {
                     // Gera ID do empréstimo
                     long emprestimoId = emprestimoDAO.getProxId();
                     LocalDate dataEmprestimo = dataHoje(); //data do emprestimo
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    String dataFormatada = dataEmprestimo.format(formatter);
                     // Calcule data de devolução (7 dias a partir da data de empréstimo)
                     LocalDate dataDevolucao = datafinal(dataEmprestimo);
-                    Emprestimo emprestimo = new Emprestimo(emprestimoId, leitor.getCpf(), livro, dataEmprestimo, dataDevolucao);
+                    Emprestimo emprestimo = new Emprestimo(livro, dataFormatada, leitor);
                     //Usa DAO para add o emprestimo no banco de dados
                     EmprestimoDAO emprestimodao = DAO.getEmprestimoDAO();
                     emprestimodao.create(emprestimo);
@@ -92,12 +96,14 @@ public class Bibliotecario extends Pessoa {
             }else{
                 if(livro.getReservaFila().element() == leitor){  //se o leitor for o primeiro da fila, realiza o emprestimo, se não ele reserva o livro
                     //Gera ID do empréstimo
-                    long emprestimoId = emprestimoDAO.getProxId();
-                    LocalDate dataEmprestimo = dataHoje(); //data do emprestimo
+                    int emprestimoId = emprestimoDAO.getProxId();
+                    LocalDate dataEmprestimo = dataHoje();//data do emprestimo
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    String dataFormatada = dataEmprestimo.format(formatter);
                     //Calcula data de devolução (7 dias a partir da data de empréstimo)
                     LocalDate dataDevolucao = datafinal(dataEmprestimo);
                     //Cria um emprestimo
-                    Emprestimo emprestimo = new Emprestimo(emprestimoId, leitor.getCpf(), livro, dataEmprestimo, dataDevolucao);
+                    Emprestimo emprestimo = new Emprestimo(livro, dataFormatada, leitor);
                     //Usa DAO para adicionar o emprestimo ao banco de dados
                     EmprestimoDAO emprestimodao = DAO.getEmprestimoDAO();
                     emprestimoDAO.create(emprestimo); //adiciona no banco de dados
@@ -121,7 +127,7 @@ public class Bibliotecario extends Pessoa {
      * @param quantidade        Quantidade do livro
      */
 
-    public void registroLivro(String isbn, String titulo, String autor, String editora, int anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
+    public void registroLivro(String isbn, String titulo, String autor, String editora, Year anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) throws Exception {
         Livro newLivro = new Livro(isbn, titulo, autor, editora, anoPublicacao, categoria,localizacao , quantidade);
 
         for (Livro livro : DAO.getLivroDAO().findMany()) {

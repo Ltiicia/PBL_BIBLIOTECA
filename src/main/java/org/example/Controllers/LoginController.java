@@ -4,11 +4,10 @@
 
 package org.example.Controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,8 +16,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.DAO.DAO;
+import org.example.Model.Leitor;
 
-public class LoginController {
+import java.io.File;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+public class LoginController implements Initializable {
 
 
     @FXML
@@ -29,7 +34,8 @@ public class LoginController {
 
     @FXML
     private Label errorMessage;
-
+    @FXML
+    private ImageView image;
     @FXML
     private TextField idTextField;
 
@@ -72,16 +78,17 @@ public class LoginController {
         String userType = selectedRadioButton.getText();
         String senhaText = senhaTextField.getText();
         String cpfText = idTextField.getText();
+
+
         switch (userType) {
             case "Leitor":
-                if (!senhaText.isEmpty() || !cpfText.isEmpty() && DAO.getLeitorDAO().findByCPF(senhaTextField.getText())) {
+                if (!senhaText.isEmpty() && !cpfText.isEmpty() && DAO.getLeitorDAO().findByCPFIsTrue(senhaTextField.getText()) ) {
                     try {
                         Stage currentScreen = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         currentScreen.close();
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/pbl_biblioteca/home-view.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/pbl_biblioteca/homeLeitor-view.fxml"));
                         Parent root = loader.load();
                         HomeLeitorController homeLeitorController = loader.getController();
-                       // homeLeitorController.setTechinicianCpf(cpfText);
 
                         Stage registerStage = new Stage();
                         Scene scene = new Scene(root);
@@ -90,28 +97,108 @@ public class LoginController {
                         registerStage.show();
                        // registerStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/sistema_gerenciamentofx/images/1.png")));
                     } catch (Exception excep) {
+                        ErrorTextController errorTextController = new ErrorTextController();
+                        errorTextController.showErrorText("Preencha todos os campos corretamente para efetuar o login");
                         excep.printStackTrace();
                     }
                 } else {
                     ErrorTextController errorTextController = new ErrorTextController();
-                    if(senhaText.isEmpty() || cpfText.isEmpty()){
+                    if(usuarios.getSelectedToggle() == null || userType.isEmpty() || senhaText.isEmpty() || cpfText.isEmpty()){
                         errorTextController.showErrorText("Preencha todos os campos corretamente para efetuar o login");
-                    } else if (!DAO.getLeitorDAO().findByCPF(cpfText)) {
+                    } else if (!DAO.getLeitorDAO().findByCPFIsTrue(cpfText) && !Objects.equals(DAO.getLeitorDAO().findById(cpfText).getUserTipo(), userType)) {
                         errorTextController.showErrorText("Login não cadastrado\nPor favor registre-se");
                     }
                 }
                 break;
-            case "Bibliotecario":
+            case "Bibliotecário":
                // loginBiblio();
+                if (!senhaText.isEmpty() && !cpfText.isEmpty() && DAO.getBibliotecarioDAO().findByCPFIsTrue(senhaTextField.getText())) {
+                    try {
+                        Stage currentScreen = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        currentScreen.close();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/pbl_biblioteca/homeBiblio-view.fxml"));
+                        Parent root = loader.load();
+                        HomeBiblioController homeBiblioController = loader.getController();
+                        homeBiblioController.setBiliotecarioCpf(cpfText);
+
+                        Stage registerStage = new Stage();
+                        Scene scene = new Scene(root);
+                        registerStage.setResizable(false);
+                        registerStage.setScene(scene);
+                        registerStage.show();
+                        // registerStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/sistema_gerenciamentofx/images/1.png")));
+                    } catch (Exception excep) {
+                        ErrorTextController errorTextController = new ErrorTextController();
+                        errorTextController.showErrorText("Preencha todos os campos corretamente para efetuar o login");
+                        excep.printStackTrace();
+                    }
+                } else {
+                    ErrorTextController errorTextController = new ErrorTextController();
+                    if(usuarios.getSelectedToggle() == null || userType.isEmpty() || senhaText.isEmpty() || cpfText.isEmpty()){
+                        errorTextController.showErrorText("Preencha todos os campos corretamente para efetuar o login");
+                    } else if (!DAO.getBibliotecarioDAO().findByCPFIsTrue(cpfText) && !Objects.equals(DAO.getBibliotecarioDAO().findById(cpfText).getUserTipo(), userType)) {
+                        errorTextController.showErrorText("Login não cadastrado\nPor favor registre-se");
+                    }
+                }
                 break;
-            case "Adm":
+            case "Administrador":
               //  loginAdmin();
+                if (!senhaText.isEmpty() && !cpfText.isEmpty() && DAO.getAdmDAO().findByCPFIsTrue(senhaTextField.getText())) {
+                    try {
+                        Stage currentScreen = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        currentScreen.close();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/pbl_biblioteca/homeAdm-view.fxml"));
+                        Parent root = loader.load();
+                        HomeAdmController homeAdmController = loader.getController();
+                        homeAdmController.setAdmCpf(cpfText);
+
+                        Stage registerStage = new Stage();
+                        Scene scene = new Scene(root);
+                        registerStage.setResizable(false);
+                        registerStage.setScene(scene);
+                        registerStage.show();
+                        // registerStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/sistema_gerenciamentofx/images/1.png")));
+                    } catch (Exception excep) {
+                        ErrorTextController errorTextController = new ErrorTextController();
+                        errorTextController.showErrorText("Preencha todos os campos corretamente para efetuar o login");
+                        excep.printStackTrace();
+                    }
+                } else {
+                    ErrorTextController errorTextController = new ErrorTextController();
+                    if(usuarios.getSelectedToggle() == null || userType.isEmpty() || senhaText.isEmpty() || cpfText.isEmpty()){
+                        errorTextController.showErrorText("Preencha todos os campos corretamente para efetuar o login");
+                    } else if (!DAO.getAdmDAO().findByCPFIsTrue(cpfText) && !Objects.equals(DAO.getAdmDAO().findById(cpfText).getUserTipo(), userType)) {
+                        errorTextController.showErrorText("Login não cadastrado\nPor favor registre-se");
+                }
                 break;
         }
 
-    }
+    }}
+
     @FXML
     void registroBttAction(ActionEvent event) {
+        try {
+            Stage currentScreen = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentScreen.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/pbl_biblioteca/register-view.fxml"));
+            Parent root = loader.load();
+            Stage registerStage = new Stage();
+            Scene scene = new Scene(root);
+            registerStage.setResizable(false);
+            registerStage.setScene(scene);
+            registerStage.show();
+
+        } catch (Exception excep) {
+            excep.printStackTrace();
+        }
+
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        File livroFile = new File("images/livro.png");
+        Image livroImage = new Image(livroFile.toURI().toString());
+        image.setImage(livroImage);
 
     }
 
@@ -129,8 +216,6 @@ public class LoginController {
 
     }
 
-    public void validatelogin(){
 
-    }
 
 }

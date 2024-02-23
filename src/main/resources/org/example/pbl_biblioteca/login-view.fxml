@@ -26,7 +26,7 @@
    <children>
       <AnchorPane prefHeight="530.0" prefWidth="286.0" style="-fx-background-color: #BE81F7;">
          <children>
-            <ImageView fx:id="livrosImageView" fitHeight="214.0" fitWidth="215.0" layoutX="57.0" layoutY="194.0" opacity="0.77" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="image" fitHeight="214.0" fitWidth="215.0" layoutX="57.0" layoutY="194.0" opacity="0.77" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../images/livro.png" />
                </image>
@@ -77,11 +77,6 @@
                   <Button fx:id="registroButton" alignment="CENTER" mnemonicParsing="false" onAction="#registroBttAction" prefWidth="80.0" text="Resgistro" />
                </children>
             </HBox>
-            <Label fx:id="errorMessage" alignment="CENTER" layoutX="1.0" layoutY="381.0" prefHeight="18.0" prefWidth="410.0" style="-fx-background-color: #FE2E2E;" text="Senha incorreta, tente novamente!" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
             <PasswordField fx:id="senhaTextField" alignment="CENTER" layoutX="176.0" layoutY="205.0" promptText="Senha" />
          </children>
       </AnchorPane>

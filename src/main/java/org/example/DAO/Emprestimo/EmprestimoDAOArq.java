@@ -1,13 +1,12 @@
 package org.example.DAO.Emprestimo;
 
-import org.example.Arquivo.Arquivos;
+import org.example.utils.Arquivos;
 import org.example.Model.Emprestimo;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class EmprestimoDAOArq implements EmprestimoDAO{
 
@@ -18,25 +17,30 @@ public class EmprestimoDAOArq implements EmprestimoDAO{
         arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
     }
 
-    private final Map<Long, Emprestimo> emprestimoMap = new HashMap<>();
+    private final HashMap<Integer, Emprestimo> emprestimoMap = new HashMap<>();
     //HashMap que guarda todos emprestimos feitos (id:emprestimo)
 
-    public Map<Long, Emprestimo> getEmprestimoMap() {
+    public HashMap<Integer, Emprestimo> getEmprestimoMap() {
         //retorna todos os emprestimos em formato Map
         return emprestimoMap;
     }
-    private long proxId = 0;
+    private int proxId = 0;
 
-    public long getProxId() {
+    public int getProxId() {
         return proxId++;// retorna Id para o objeto
         // define o próximo Id incrementando do anterior
+    }
+
+    @Override
+    public Emprestimo findId(int id) {
+        return null;
     }
 
 
     //Métodos CRUD
     @Override
     public Emprestimo create(Emprestimo emprestimo){
-        long id = emprestimo.getIdEmprestimo();
+        int id = emprestimo.getId();
         emprestimoMap.put(id, emprestimo);
         Arquivos.sobreescreverArquivo(arquivo,emprestimoMap);
         return emprestimo;
@@ -62,20 +66,20 @@ public class EmprestimoDAOArq implements EmprestimoDAO{
 
     @Override
     public Emprestimo update(Emprestimo emprestimo){
-        emprestimoMap.put(emprestimo.getIdEmprestimo(), emprestimo);
+        emprestimoMap.put(emprestimo.getId(), emprestimo);
         Arquivos.sobreescreverArquivo(arquivo,emprestimoMap);
         return null;
     }//atualiza o emprestimo no hashmap
 
     @Override
-    public boolean findByCPF(String cpf) {
+    public boolean findByCPFIsTrue(String cpf) {
         return false;
     }
 
 
     @Override
     public void delete(Emprestimo emprestimo){
-        long id = emprestimo.getIdEmprestimo();
+        int id = emprestimo.getId();
         emprestimoMap.remove(id);
         Arquivos.sobreescreverArquivo(arquivo,emprestimoMap);
     }//deleta o emprestimo

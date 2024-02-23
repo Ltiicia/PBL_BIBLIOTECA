@@ -1,6 +1,7 @@
 package org.example.DAO.Bibliotecario;
 
-import org.example.Arquivo.Arquivos;
+import org.example.Model.Leitor;
+import org.example.utils.Arquivos;
 import org.example.Model.Bibliotecario;
 
 import java.io.File;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.example.utils.Arquivos.consultarArquivoMap;
 
 public class BibliotecarioDAOArq implements BibliotecarioDAO{
 
@@ -18,7 +21,7 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
         arquivo = Arquivos.gerarArquivo(NOMEARQUIVO);
     }
 
-    private final Map<String, Bibliotecario> bibliotecarioMap = new HashMap<>();
+    private final HashMap<String, Bibliotecario> bibliotecarioMap = new HashMap<>();
     //HashMap que guarda todos bibliotecarios cadastrados (id:bibliotecario)
 
 
@@ -28,7 +31,7 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
      * @return bibliotecarioMap
      */
     @Override
-    public Map<String, Bibliotecario> getBibliotecarioMap() {
+    public HashMap<String, Bibliotecario> getBibliotecarioMap() {
         return bibliotecarioMap;
     }//retorna todos os bibliotecarios em um Map
 
@@ -60,13 +63,20 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
         return bibliotecario;
     }
 
-    @Override
-    public boolean findByCPF(String cpf) {
-        if (bibliotecarioMap.containsKey(cpf)) {
-            return true;
-        } else {
-            return false;
+    public String achaCpf(String cpf){
+        Bibliotecario bilbio = this.bibliotecarioMap.get(cpf);
+        if(bilbio != null){
+            return bilbio.getCpf();
         }
+        throw new IllegalArgumentException("Tecnico não detectado no banco de dados");
+    }
+
+    @Override
+    public boolean findByCPFIsTrue(String cpf) {
+        if (this.bibliotecarioMap.containsKey(cpf)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -76,7 +86,11 @@ public class BibliotecarioDAOArq implements BibliotecarioDAO{
 
     @Override
     public Bibliotecario findById(String cpf){
-        return bibliotecarioMap.get(cpf);
+        Bibliotecario bibliotecario = this.bibliotecarioMap.get(cpf);
+        if(bibliotecario != null){
+            return bibliotecario;
+        }
+        throw new IllegalArgumentException("Bibliotecario não detectado no banco de dados");
     }
 
 }

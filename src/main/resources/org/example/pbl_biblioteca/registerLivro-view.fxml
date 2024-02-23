@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controllers.RegistraLivroController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="194.79999389648438" minHeight="10.0" prefHeight="95.5999740600586" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="434.40002593994143" minHeight="10.0" prefHeight="434.40002593994143" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="113.0" prefWidth="715.0" style="-fx-background-color: #BE81F7;" GridPane.hgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER" layoutX="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="740.0">
+               <children>
+                  <ImageView fx:id="image" fitHeight="59.0" fitWidth="73.0" opacity="0.51" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../images/livro.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="566.0" text="REGISTRO DOS LIVROS">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.rowIndex="1">
+         <children>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefWidth="145.0" text="Título:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tituloTextField" prefWidth="350.0" promptText="Título do livro" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefWidth="145.0" text="Autor:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="autorTextField" prefWidth="350.0" promptText="Autor do livro" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefWidth="145.0" text="Ano de publicação: ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="anoPubliTextField" prefWidth="350.0" promptText="Ano de Publicação" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="145.0" text="Editora:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="editoraTextField" prefWidth="350.0" promptText="Editora" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefWidth="145.0" text="ISBN:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="isbnTextField" prefWidth="350.0" promptText="ISBN" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="145.0" text="Categoria:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="categoriaTextField" prefWidth="350.0" promptText="Categoria" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="145.0" text="Quantidade disponivel:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="qntTextField" prefWidth="350.0" promptText="Quantidade" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Label prefWidth="145.0" text="Localização: ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="corredorTextField" prefHeight="26.0" prefWidth="110.0" promptText="Corredor" />
+                  <TextField fx:id="prateleiraTextField" prefHeight="26.0" prefWidth="100.0" promptText="Prateleira" />
+                  <TextField fx:id="secaoTextField" prefHeight="26.0" prefWidth="100.0" promptText="Seção" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="100.0">
+                     <children>
+                        <Button fx:id="voltarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#voltarBttAction" prefWidth="100.0" text="Voltar">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="registrarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#registrarBttAction" prefWidth="100.0" text="Registrar">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children></HBox>
+         </children>
+      </VBox>
+   </children>
+</GridPane>

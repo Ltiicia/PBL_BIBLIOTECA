@@ -32,42 +32,42 @@ public class DAO {
     private static LeitorDAO leitorDAO;
 
 
-    public static LivroDAO getLivroDAO() {
+    public static LivroDAO getLivroDAO() throws Exception {
         if (livroDAO == null) {
             livroDAO = new LivroDAOArq();
         }
         return livroDAO;
     }
 
-    public static RelatoriosDAO getRelatoriosDAO() {
+    public static RelatoriosDAO getRelatoriosDAO() throws Exception {
         if (relatoriosDAO == null) {
             relatoriosDAO = new RelatoriosDAOArq();
         }
         return relatoriosDAO;
     }
 
-    public static EmprestimoDAO getEmprestimoDAO() {
+    public static EmprestimoDAO getEmprestimoDAO() throws Exception {
         if (emprestimoDAO == null) {
             emprestimoDAO = new EmprestimoDAOArq();
         }
         return emprestimoDAO;
     }
 
-    public static BibliotecarioDAO getBibliotecarioDAO() {
+    public static BibliotecarioDAO getBibliotecarioDAO() throws Exception {
         if (bibliotecarioDAO == null) {
             bibliotecarioDAO = new BibliotecarioDAOArq();
         }
         return bibliotecarioDAO;
     }
 
-    public static ADMDAO getAdmDAO(){
+    public static ADMDAO getAdmDAO() throws Exception {
         if(admDAO == null){
             admDAO = new ADMDAOArq();
         }
         return admDAO;
     }
 
-    public static LeitorDAO getLeitorDAO(){
+    public static LeitorDAO getLeitorDAO() throws Exception {
         if(leitorDAO == null){
             leitorDAO = new LeitorDAOArq();
         }

@@ -21,7 +21,7 @@ public class LeitorTest {
 
     @BeforeEach
     public void setUp() {
-        leitor = new Leitor("Nome", 1, "123", 20, "xx xxxxx-xxxx", "Ali");
+        leitor = new Leitor("Nome", "1", "123", "20", "Ali");
         localizacao = new LocalizaLivro("Prateleira", "Seção", "Corredor");
         livro = new Livro("Titulo", "Autor", "Editora","ISBN157", 2023, "Categoria", localizacao, 1);
         dateLoan = LocalDate.now();
@@ -56,7 +56,7 @@ public class LeitorTest {
 
     @Test
     public void testRenovaEmprestimo() throws EmprestimoExcecao {
-        Emprestimo emprestimo = new Emprestimo(1, 1, livro, dateLoan, dateDevolution);
+        Emprestimo emprestimo = new Emprestimo(1, "1", livro, dateLoan, dateDevolution);
         emprestimo.setAtivo(false);
 
         try {
@@ -69,11 +69,11 @@ public class LeitorTest {
 
     @Test
     public void testRenovaComReservaFila() {
-        Emprestimo emprestimo = new Emprestimo(1, 1, livro, dateLoan, dateDevolution);
+        Emprestimo emprestimo = new Emprestimo(1, "1", livro, dateLoan, dateDevolution);
         emprestimo.setAtivo(true);
 
         // Garantindo que a fila não está vazia
-        Leitor l = new Leitor("Nome",2, "S12348", 25, "xx xxxxx-xxxx", "ALI");
+        Leitor l = new Leitor("Nome","2", "S12348", "25", "Ali");
         livro.getReservaFila().add(l);
 
         try {

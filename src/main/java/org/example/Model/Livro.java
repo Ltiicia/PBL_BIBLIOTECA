@@ -1,5 +1,6 @@
 package org.example.Model;
 
+import java.time.Year;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,12 +24,13 @@ public class Livro {
     private String autor;
     private String editora;
     private String isbn;
-    private int anoPublicacao;
+    private Year anoPublicacao;
     private String categoria;
     private LocalizaLivro localizacao;
-    private int quantidadeDisponivel;
+    private static int quantidadeDisponivel;
     private int quantidadetotal;
     private int quantidadeEmprestimo = 0;
+    private Boolean disponibilidade;
     private Queue<Leitor> reservaFila = new LinkedList<>();
 
     /**
@@ -42,7 +44,7 @@ public class Livro {
      * @param localizacao           Localizacao
      * @param quantidade            Quantidade
      */
-    public Livro(String titulo, String autor, String editora, String isbn, int anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
+    public Livro(String titulo, String autor, String editora, String isbn, Year anoPublicacao, String categoria, LocalizaLivro localizacao, int quantidade) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
@@ -52,6 +54,7 @@ public class Livro {
         this.localizacao = localizacao;
         this.quantidadeDisponivel = quantidade;
         this.quantidadetotal = quantidade;
+        this.disponibilidade = disponibilidade = true;
 
     }
 
@@ -88,7 +91,7 @@ public class Livro {
 
         return isbn;
     }
-    public int getAnoPublicacao() {
+    public Year getAnoPublicacao() {
 
         return anoPublicacao;
     }
@@ -96,10 +99,18 @@ public class Livro {
 
         return categoria;
     }
+
+    public Boolean getDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(Boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
     public LocalizaLivro getLocalizacao(){
         return localizacao;
     }
-    public int getQuantidadeDisponivel(){
+    public static int getQuantidadeDisponivel(){
         return quantidadeDisponivel;
     }
 
@@ -127,7 +138,7 @@ public class Livro {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    public void setAnoPublicacao(int anoPublicacao) {
+    public void setAnoPublicacao(Year anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
     }
     public void setCategoria(String categoria) {

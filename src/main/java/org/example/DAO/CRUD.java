@@ -1,5 +1,6 @@
 package org.example.DAO;
 
+import java.io.File;
 import java.util.List;
 
 public interface CRUD <T>{
@@ -10,7 +11,7 @@ public interface CRUD <T>{
     public void delete(T obj);
 
     public T update(T obj);
-    public boolean findByCPF(String cpf);
+    public boolean findByCPFIsTrue(String cpf);
 
     public List<T> findMany(); //retorna lista de obj
 

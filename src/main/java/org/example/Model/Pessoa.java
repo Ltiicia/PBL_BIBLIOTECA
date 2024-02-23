@@ -18,11 +18,13 @@ import java.util.Objects;
  * @author Letícia Gonçalves e Helena Filemon
  */
 public class Pessoa {
-    private String nome;
-    private String cpf;
+    private static String nome;
+    private static String cpf;
     private String senha;
-    private String celular;
-    private String endereco;
+    private static String celular;
+    private static String endereco;
+
+    public static String userTipo;
 
 
     /**
@@ -33,19 +35,24 @@ public class Pessoa {
      * @param celular           Celular da Pessoa
      * @param endereco          Endereço da Pessoa
      */
-    public Pessoa(String nome, String cpf, String senha, String celular, String endereco){  //construtor
-        this.nome = nome;
-        this.cpf = cpf;  //ALTERADO NA CLASSE PESSOADAOIMPL
+    public Pessoa(String userTipo, String nome, String cpf, String senha, String celular, String endereco){  //construtor
+        Pessoa.userTipo = userTipo;
+        Pessoa.nome = nome;
+        Pessoa.cpf = cpf;  //ALTERADO NA CLASSE PESSOADAOIMPL
         this.senha = senha;
         this.celular = celular;
         this.endereco = endereco;
     }
     // Métodos Get
-    public String getNome() {
+
+    public static String getUserTipo(){
+        return userTipo;
+    }
+    public static String getNome() {
 
         return nome;
     }
-    public String getCpf() {
+    public static String getCpf() {
 
         return cpf;
     }
@@ -53,15 +60,18 @@ public class Pessoa {
 
         return senha;
     }
-    public String getCelular() {
+    public static String getCelular() {
 
         return celular;
     }
-    public String getEndereco(){
+    public static String getEndereco(){
         return endereco;
     }
 
     // Métodos Set
+    public void setUserTipo(String userTipo){
+        this.userTipo = userTipo;
+    }
     public void setNome(String nome) {
 
         this.nome = nome;
@@ -74,7 +84,7 @@ public class Pessoa {
 
         this.senha = Senha;
     }
-    public void setCelular(String celular) {
+    public void setCelular() {
 
         this.celular = celular;
     }
@@ -132,4 +142,6 @@ public class Pessoa {
         // Chama o método de pesquisa por categoria no DAO de livros
         return DAO.livroDAO.findCategoria(categoria);
     }
+
+
 }

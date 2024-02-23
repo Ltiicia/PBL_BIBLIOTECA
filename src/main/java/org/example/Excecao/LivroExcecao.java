@@ -1,7 +1,10 @@
 package org.example.Excecao;
 
+import org.example.Model.Livro;
+
 public class LivroExcecao extends Exception{
 
+    private Livro livro;
     //disponibilidade de um livro
     public static final String Disponivel = "Este livro está disponível. ";
     public static final String Indisponivel = "Esse livro está indisponível. ";
@@ -28,9 +31,11 @@ public class LivroExcecao extends Exception{
     public static final String SemLivrosEmprestados = "Nenhum livro emprestado. ";
     public static final String SemLivrosReservados = "Nenhum livro reservado. ";
     public static final String SemLivrosAtrasados = "Nenhum livro atrasado. ";
-
-
-    public LivroExcecao(String message) {
-        super(message);
+    public LivroExcecao(String texto, Livro livro){
+        super (texto);
+        this.livro=livro;
+    }
+    public LivroExcecao(String texto){
+        super(texto);
     }
 }

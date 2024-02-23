@@ -1,14 +1,15 @@
 package org.example.Model;
 
-import org.example.Arquivo.Arquivos;
 import org.example.DAO.Emprestimo.EmprestimoDAOArq;
 import org.example.DAO.Livro.LivroDAOArq;
 import org.example.Excecao.EmprestimoExcecao;
 import org.example.Excecao.LivroExcecao;
+import org.example.utils.Arquivos;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class Relatorios {
     private List<Livro> livrosReservados; //armazena livros que já estão reservados
 
 
-    public Relatorios() {
+    public Relatorios() throws Exception {
         this.livrosEmprestados = new ArrayList<>();
         this.livrosAtrasados = new ArrayList<>();
         this.livrosReservados = new ArrayList<>();
@@ -88,7 +89,7 @@ public class Relatorios {
      * @throws LivroExcecao exceção de livro
      */
     public List<Livro> geraLivrosAtrasados() throws LivroExcecao {
-        Map<Long, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
+        HashMap<Integer, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
         for (Emprestimo emprestimo : emprestimoMap.values()) {
             LocalDate now = LocalDate.now();
             if (now.isAfter(emprestimo.getDataDevolucao())) {
@@ -119,7 +120,7 @@ public class Relatorios {
      * Retorna lista de livros reservados
      * @return lista de reservados
      */
-    public List<Livro> geraReservos() {
+    public List<Livro> geraReservos() throws Exception {
         Map<String, Livro> livroMap = findManyMap();
         for (Livro livro : livroMap.values()) {
             if (!livro.getReservaFila().isEmpty()) {
@@ -129,7 +130,7 @@ public class Relatorios {
         return livrosReservados;
     }
 
-    private Map<String, Livro> findManyMap() {
+    private HashMap<String, Livro> findManyMap() throws Exception {
         return Arquivos.consultarArquivoMap(arquivo);
     }
 
@@ -151,7 +152,7 @@ public class Relatorios {
      * @return livros populares
      * @throws EmprestimoExcecao Exceção emprestimo
      */
-    public List<Livro> geraLivroPopular() throws EmprestimoExcecao {
+    public List<Livro> geraLivroPopular() throws Exception {
         int maiorValor = 0;
         List<Livro> livroPopular = null;
         Map<String, Livro> livroMap = livros.findManyMap();
@@ -179,7 +180,7 @@ public class Relatorios {
      */
     public List<Emprestimo> geraPessoaEmprestimo(Leitor Leitor) throws EmprestimoExcecao {
         List<Emprestimo> emprestimoHistorico = null;
-        Map<Long, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
+        HashMap<Integer, Emprestimo> emprestimoMap = emprestimos.getEmprestimoMap();
         String cpf = Leitor.getCpf();
         for (Emprestimo emprestimo : emprestimoMap.values()) {
             if ((cpf) == emprestimo.getCpf()) {

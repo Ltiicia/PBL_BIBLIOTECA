@@ -1,10 +1,12 @@
-package org.example.Arquivo;
+package org.example.utils;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import java.util.List;
+
 public abstract class Arquivos {
 
     public static final File DIRETORIO = new File("cache");
@@ -26,10 +28,10 @@ public abstract class Arquivos {
         return arquivo;
     }
 
-    public static <V> Map<String, V> consultarArquivoMap(File file){
-        Map<String, V> map;
+    public static <V> HashMap<String, V> consultarArquivoMap(File file){
+        HashMap<String, V> map;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-            map = (Map<String, V>) in.readObject();
+            map = (HashMap<String, V>) in.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
             map = new HashMap<>();

@@ -1,6 +1,6 @@
 package org.example.DAO.Leitor;
 
-import org.example.Arquivo.Arquivos;
+import org.example.utils.Arquivos;
 import org.example.Model.Leitor;
 
 import java.io.File;
@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeitorDAOArq implements LeitorDAO {
+import static org.example.utils.Arquivos.consultarArquivoMap;
+
+public class LeitorDAOArq implements LeitorDAO{
 
     File arquivo;
     private static final String NOMEARQUIVO= "Leitor";
@@ -19,13 +21,18 @@ public class LeitorDAOArq implements LeitorDAO {
     }
 
     //Leitor
-    private final Map<String, Leitor> leitorMap = new HashMap<>();
+    private final HashMap<String, Leitor> leitorMap = new HashMap<>();
     //HashMap que guarda todos leitores cadastrados (id:leitor)
 
     @Override
-    public Map<String, Leitor> getLeitorMap() {
+    public HashMap<String, Leitor> getLeitorMap() {
         return leitorMap;
     }//retorna todos os Leitores em formato Map
+
+    @Override
+    public Leitor findLeitor(String cpf) {
+        return null;
+    }
 
 
     //Métodos CRUD
@@ -50,12 +57,11 @@ public class LeitorDAOArq implements LeitorDAO {
     }
 
     @Override
-    public boolean findByCPF(String cpf) {
-        if (leitorMap.containsKey(cpf)) {
+    public boolean findByCPFIsTrue(String cpf) {
+        if (this.leitorMap.containsKey(cpf)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -69,9 +75,26 @@ public class LeitorDAOArq implements LeitorDAO {
         Arquivos.apagarConteudoArquivo(arquivo);
     }
 
-    @Override
-    public Leitor findById(String cpf) {
-        return leitorMap.get(cpf);
+    public String achaCpf(String cpf){
+        Leitor leitor = this.leitorMap.get(cpf);
+        if(leitor != null){
+            return leitor.getCpf();
+        }
+        throw new IllegalArgumentException("Tecnico não detectado no banco de dados");
     }
+    @Override
+    public Leitor findById(String CPF){
+        Leitor leitor = this.leitorMap.get(CPF);
+        if(leitor != null){
+            return leitor;
+        }
+        throw new IllegalArgumentException("Leitor não detectado no banco de dados");
+    }
+
+    @Override
+    public String acharCpf(String cpfText) {
+        return null;
+    }
+
 
 }
