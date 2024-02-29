@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.Year;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,9 +22,10 @@ public class LeitorTest {
 
     @BeforeEach
     public void setUp() {
-        leitor = new Leitor("Nome", "1", "123", "20", "Ali");
+        Year ano = Year.parse("2023");
+        leitor = new Leitor("leitor", "nome", "123", "20", "1234", "ali");
         localizacao = new LocalizaLivro("Prateleira", "Seção", "Corredor");
-        livro = new Livro("Titulo", "Autor", "Editora","ISBN157", 2023, "Categoria", localizacao, 1);
+        livro = new Livro("Titulo", "Autor", "Editora","ISBN157", ano, "Categoria", localizacao, 1);
         dateLoan = LocalDate.now();
         dateDevolution = dateLoan.plusDays(7);
     }
@@ -56,7 +58,7 @@ public class LeitorTest {
 
     @Test
     public void testRenovaEmprestimo() throws EmprestimoExcecao {
-        Emprestimo emprestimo = new Emprestimo(1, "1", livro, dateLoan, dateDevolution);
+        Emprestimo emprestimo = new Emprestimo(livro, "23", leitor);
         emprestimo.setAtivo(false);
 
         try {
@@ -69,11 +71,11 @@ public class LeitorTest {
 
     @Test
     public void testRenovaComReservaFila() {
-        Emprestimo emprestimo = new Emprestimo(1, "1", livro, dateLoan, dateDevolution);
+        Emprestimo emprestimo = new Emprestimo(livro, "23", leitor);
         emprestimo.setAtivo(true);
 
         // Garantindo que a fila não está vazia
-        Leitor l = new Leitor("Nome","2", "S12348", "25", "Ali");
+        Leitor l = new Leitor("leitor", "nome", "123", "20", "1234", "ali");
         livro.getReservaFila().add(l);
 
         try {

@@ -1,9 +1,12 @@
 package Testes.DAOtest;
 
+import org.example.Model.Leitor;
 import org.example.Model.LocalizaLivro;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDate;
+import java.time.Year;
+
 import org.example.DAO.DAO;
 import org.example.Model.Livro;
 import org.example.Model.Emprestimo;
@@ -15,6 +18,7 @@ public class EmprestimoDAOTest {
 
     private LocalizaLivro localizacao;
     private Livro livro;
+    private Leitor leitor;
     private Emprestimo emprestimo1;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
@@ -22,45 +26,48 @@ public class EmprestimoDAOTest {
     @BeforeEach
     public void setUp() {
         // Configurando objetos para teste
+
+        Year ano = Year.parse("2023");
         localizacao = new LocalizaLivro("Estante", "Sessao", "Corredor");
-        livro = new Livro("Título", "Autor", "Editora","ISBN1234", 2023, "Categoria", localizacao, 1);
+        livro = new Livro("Título", "Autor", "Editora","ISBN1234", ano, "Categoria", localizacao, 1);
+        leitor = new Leitor("leitor", "nome", "123", "20", "1234", "ali");
         dataEmprestimo = LocalDate.now();
         dataDevolucao = dataEmprestimo.plusDays(7);
-        emprestimo1 = new Emprestimo(7, 23, livro, dataEmprestimo, dataDevolucao);
+        emprestimo1 = new Emprestimo(livro, "23", leitor);
     }
 
     @Test
-    public void testAddEmprestimo() {
+    public void testAddEmprestimo() throws Exception {
         LocalDate dataEmprestimo = LocalDate.now(); //diz a data do dia atual ou seja, a data do emprestimo
         LocalDate dataDevolucao = dataEmprestimo.plusDays(7); // Calcule a data de devolução (10 dias a partir da data de empréstimo)
-        Emprestimo emprestimo = new Emprestimo(9, 23, livro, dataEmprestimo, dataDevolucao);
+        Emprestimo emprestimo = new Emprestimo(livro, "23", leitor);
 
         DAO.getEmprestimoDAO().create(emprestimo);
         assertFalse(DAO.getEmprestimoDAO().findMany().isEmpty()); // verifica se a lista está vazia
     }
 
     @Test
-    public void testFindById() {
-        assertNotNull(DAO.getEmprestimoDAO().findById(9)); // verifica se é encontrado um livro pelo isbn
+    public void testFindById() throws Exception {
+        assertNotNull(DAO.getEmprestimoDAO().findById("9")); // verifica se é encontrado um livro pelo isbn
     }
 
     @Test
-    public void testUpdateEmprestimo() {
+    public void testUpdateEmprestimo() throws Exception {
         // Salvando um empréstimo no DAO
         DAO.getEmprestimoDAO().create(emprestimo1);
 
         // Atualizando o empréstimo cujo número de identificação é igual a 7
-        Emprestimo emprestimo2 = new Emprestimo(7, 23, livro, dataEmprestimo, dataDevolucao);
+        Emprestimo emprestimo2 = new Emprestimo(livro, "23", leitor);
         DAO.getEmprestimoDAO().update(emprestimo2);
 
         // Pegando o retorno que a busca por ID retorna para fins de comparação
-        Emprestimo emprestimoTest = DAO.getEmprestimoDAO().findById(7);
+        Emprestimo emprestimoTest = DAO.getEmprestimoDAO().findById("7");
 
         assertNotEquals(emprestimo1, emprestimoTest); // asserta que o conteúdo dos objetos são diferentes
     }
 
     @Test
-    public void testDeleteEmprestimo() {
+    public void testDeleteEmprestimo() throws Exception {
         // Salvando um empréstimo no DAO
         DAO.getEmprestimoDAO().create(emprestimo1);
 
@@ -73,7 +80,7 @@ public class EmprestimoDAOTest {
     }
 
     @Test
-    public void testDeleteMany() {
+    public void testDeleteMany() throws Exception {
         // Salvando um empréstimo no DAO
         DAO.getEmprestimoDAO().create(emprestimo1);
         // Deletando toda a lista de empréstimos

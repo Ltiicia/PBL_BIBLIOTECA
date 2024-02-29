@@ -11,30 +11,33 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ADMTest {
-    ADM adm = new ADM("Rogerio", 1, "123", 42,"75 99827-3592", "Ali");
+    ADM adm = new ADM("Administrador", "Rogerio", "123", "42123","75 99827-3592", "Ali");
+
+    public ADMTest() throws Exception {
+    }
 
     @Test
-    public void registerReader() {
+    public void registerReader() throws Exception {
         // ADM REGISTRA O LEITOR
-        Leitor leitor = adm.createLeitor("Rafael", "eu9745", 25, "75 XXXX-XXXX", "acola");
+        Leitor leitor = adm.createLeitor("Adminstrador", "Rafael", "212345", "123456", "75 XXXX-XXXX", "ali");
 
-        assertSame(leitor, DAO.getLeitorDAO().findById(leitor.getId())); // ASSERTE QUE EXISTE UM LEITOR IDÊNTICO AO CRIADO PELO ADM
+        assertSame(leitor, DAO.getLeitorDAO().findById(leitor.getCpf())); // ASSERTE QUE EXISTE UM LEITOR IDÊNTICO AO CRIADO PELO ADM
     }
 
     @Test
-    public void registerLibrarian() {
+    public void registerLibrarian() throws Exception {
         // ADM REGISTRA O BIBLIOTECÁRIO
-        Bibliotecario bibliotecario = adm.createBibliotecario("Edilene", "fe87523", 45, "75 XXXX-XXXX","Em casa");
+        Bibliotecario bibliotecario = adm.createBibliotecario("bibliootecario", "edilene", "45", "75 XXXX-XXXX","Em casa", "ali");
 
-        assertSame(bibliotecario, DAO.getBibliotecarioDAO().findById(bibliotecario.getId())); // ASSERTE QUE EXISTE UM BIBLIOTECÁRIO IDÊNTICO AO CRIADO PELO ADM
+        assertSame(bibliotecario, DAO.getBibliotecarioDAO().findById(bibliotecario.getCpf())); // ASSERTE QUE EXISTE UM BIBLIOTECÁRIO IDÊNTICO AO CRIADO PELO ADM
     }
 
     @Test
-    public void registerAdm() {
+    public void registerAdm() throws Exception {
         // ADM REGISTRA UM ADM
-        ADM newADM = adm.createAdm("Jessica", "jeje9561", 23,"75 9 0000-0000", "Na kitnet");
+        ADM newADM = adm.createAdm("bibliootecario", "Jessica", "45", "75 XXXX-XXXX","Em casa", "ali");
 
-        assertSame(newADM, DAO.getAdmDAO().findById(newADM.getId())); // ASSERTE QUE EXISTE UM ADM IDÊNTICO AO CRIADO PELO ADM
+        assertSame(newADM, DAO.getAdmDAO().findById(newADM.getCpf())); // ASSERTE QUE EXISTE UM ADM IDÊNTICO AO CRIADO PELO ADM
     }
 }
 
